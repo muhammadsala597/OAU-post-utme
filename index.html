@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>POST UTME APP</title>
+        <style>
+            body{
+                background-color:#003366;
+                display: flex;
+                flex-direction:column;
+                align-items: center;
+                color: white;
+            }
+            header{
+                font-size:20px;
+            }
+            img{
+                margin-top:100px;
+                
+            }
+            .intro button{
+                background-color:#C9A227;
+                border: none;
+                width:150px;
+                height:50px;
+                margin:auto;
+                margin-top:150px;
+                border-radius:20px;
+                cursor: pointer;
+                display:block;
+                animation: pulse 3s infinite ease-in-out;
+            }
+            @keyframes pulse{
+                0%{
+                    transform:scale(1.05);
+                }
+                50%{
+                    transform:scale(0.98);
+                }
+                100%{
+                    transform:scale(1.05);
+                }
+            }
+            @keyframes fadein{
+                from{
+                    opacity:0;
+                }
+                to{
+                    opacity:1;
+                }
+            }
+            .subjects{
+                display:none;
+                width:380px;
+                background-color:white;
+                border-radius:20px;
+                flex-direction:column;
+                align-items:center;
+                margin-top:50px; 
+            }
+            .intro{
+                display:flex;
+                flex-direction:column;
+                align-items:center;
+            }
+            .subjects button{
+                margin-bottom:20px;
+                background-color:#C9A227;
+                width:280px;
+                height:80px;
+                border:none;
+                border-radius:15px;
+                cursor:pointer;
+                transition:transform 0.5s ease;
+            }
+            .subjects button:hover{
+                transform:translate(10px) scale(1.1);
+            }
+            h4{
+                color:#003366;
+            }
+            #questions{
+                display: none;
+                flex-direction:column;
+                align-items:center;
+                margin-top:40px;
+            }
+            form{
+                width:300px;
+                background-color:white;
+                color:black;
+                padding:20px;
+                margin-top:10px;
+                margin-bottom:10px;
+                border-radius:20px;
+            }
+            label{
+                border: 1px solid #C9A227;
+                margin:5px;
+                display:flex;
+                justify-content:space-between;
+                align-items:center;
+                width:270px;
+                height:50px;
+                border-radius:10px;
+                padding:0px 5px;
+                transition: transform 0.3s;
+            }
+            label:hover{
+                transform:translate(10px) scale(1.07);
+            }
+            label:active{
+                background-color: green;
+            }
+            .buttons{
+                display:flex;
+                justify-content:space-between;
+            }
+            .controls{
+                margin:90px;
+                margin-top:10px;
+                margin-bottom:20px;
+                height:40px;
+                width:80px;
+                border:none;
+                border-radius:15px;
+                cursor:pointer;
+            }
+            .submit{
+                height:40px;
+                width:100px;
+                border:none;
+                border-radius:15px;
+                cursor:pointer;
+                margin-top:60px;
+                background-color:#C9A227;
+            }
+            .backbutton{
+                display:none;
+                border-bottom:1px solid #C9A227;
+                width:380px;
+                justify-content:space-between;
+                align-items:center;
+                box-sizing:border-box;
+                padding:20px;
+            }
+            .backbutton button{
+                width:70px;
+                height:40px;
+                margin-top:5px;
+                position:relative;
+            }
+            .submitpage{
+                display:none;
+                width:350px;
+                height:400px;
+                background-color:white;
+                color:black;
+                text-align:center;
+                font-size:20px;
+                padding:20px;
+                margin-top:60px;
+                border-radius:20px;
+            }
+            .mark{
+                font-size:59px;
+                margin-top:120px;
+            }
+            footer{
+                margin-top:200px;
+                opacity:0.7;
+            }
+        </style>
+    </head>
+    <body>
+       <div class="intro" id="intro">
+           <header>OAU Post Utme Tutor</header><img src="https://i.ibb.co/GfS4yFB7/oau-logo-eb5tgl.webp" alt="oau logo" width="180px">
+           <button id="start" onclick="start()">Click here to start</button>
+       </div>
+       <div id="backbutton">
+        <header class="backbutton" id="back"><button onclick="back()">Back</button><button class="home" onclick="home()">Home</button></header>
+       </div>
+       <div class="subjects" id="s1">
+            <h4>Choose your subject.</h4>
+            <button onclick="quiz(mathQuestions)"> Mathematics </button>
+            <button onclick="quiz(aptitudeQuestions)"> Aptitude </button>
+            <button onclick="quiz(physicsQuestions)">Physics</button>
+            <button onclick="quiz(chemistryQuestions)">Chemistry</button>
+            <button onclick="quiz(biologyQuestions)"> Biology </button>
+       </div>
+       <div class="questions" id="questions">
+           <h3 id="numberQuestion"> Question 1</h3>
+          <p id="question"></p>
+          <form>
+             <label onclick="choose(this)" class="label">  </label><br>  
+             <label onclick="choose(this)" class="label">  </label><br>  
+             <label onclick="choose(this)" class="label">  </label><br>  
+             <label onclick="choose(this)" class="label">  </label><br>  
+          </form>  
+          <div class="buttons">
+              <button class="controls" onclick="previous()" type="button">Previous</button>
+              <button class="controls" onclick="next()" type="button"> Next </button>
+          </div>
+          <button class="submit" onclick="submitExam()">Submit</button>
+       </div>
+       <div class="submitpage" id="submitpage">You scored:<span class="mark"></span>
+       </div>
+       <footer><small>Disclaimer: All questions were sourced from the Solid Solutions post-utme past questions</small></footer>
+    </body>
+    <script>
+        const mathQuestions = [
+{
+    question: "What is 12 × 8?",
+    options: ["96", "84", "88", "108"],
+    answer: "96"
+},
+{
+    question: "Solve: 3x + 5 = 20",
+    options: ["3", "5", "7", "10"],
+    answer: "5"
+},
+{
+    question: "The value of √81 is:",
+    options: ["7", "8", "9", "10"],
+    answer: "9"
+}
+];
+
+        const aptitudeQuestions = [
+    {
+        question: "How many countries are in Africa?",
+        options: ["3", "54", "4", "6"],
+        answer: "54"
+    },
+    {
+        question: "What is the capital of Nigeria?",
+        options: ["Abuja", "Lagos", "Kano", "Ibadan"],
+        answer: "Abuja"
+    }
+];
+
+        const chemistryQuestions = [
+{
+    question: "The chemical symbol for Sodium is:",
+    options: ["So", "Na", "S", "Sn"],
+    answer: "Na"
+},
+{
+    question: "Water is made up of:",
+    options: ["H₂O", "CO₂", "O₂", "NaCl"],
+    answer: "H₂O"
+},
+{
+    question: "The pH of a neutral solution is:",
+    options: ["1", "5", "7", "14"],
+    answer: "7"
+}
+];
+        
+        const physicsQuestions = [
+{
+    question: "The SI unit of force is:",
+    options: ["Joule", "Newton", "Pascal", "Watt"],
+    answer: "Newton"
+},
+{
+    question: "The acceleration due to gravity is approximately:",
+    options: ["5 m/s²", "9.8 m/s²", "15 m/s²", "20 m/s²"],
+    answer: "9.8 m/s²"
+},
+{
+    question: "Which instrument measures electric current?",
+    options: ["Voltmeter", "Thermometer", "Ammeter", "Barometer"],
+    answer: "Ammeter"
+}
+];
+
+
+        const biologyQuestions = [
+{
+    question: "The basic unit of life is the:",
+    options: ["Tissue", "Organ", "Cell", "Nucleus"],
+    answer: "Cell"
+},
+{
+    question: "Photosynthesis occurs mainly in the:",
+    options: ["Root", "Stem", "Leaf", "Flower"],
+    answer: "Leaf"
+},
+{
+    question: "Which organ pumps blood around the body?",
+    options: ["Lungs", "Kidney", "Heart", "Liver"],
+    answer: "Heart"
+}
+];
+        const labels = document.querySelectorAll("label");
+        let displayState = document.getElementById("s1");
+        let subject = document.getElementById("intro");
+        let questionDisplay = document.getElementById("questions");
+        let questionText = document.getElementById("question")
+        let numberQuestion = document.getElementById("numberQuestion")
+        let backButton = document.getElementById("back")
+        let backButton1 = document.querySelector(".backbutton")
+        let submitPage = document.getElementById("submitpage")
+        let label = document.querySelectorAll("label")
+        let mark = document.querySelector(".mark")
+        let score = 0;
+        let scoreArray = [];
+        let currentQuestion = 0;
+        let currentSubject;
+    /* to transition to the selection screen*/
+        function start(){
+            displayState.style.display = "flex";
+            displayState.style.animation ="fadein 0.5s ease"
+            subject.style.display = "none";
+            backButton1.style.display = "flex";
+            backButton1.style.justifyContent = "space-between"
+        }
+     /* to transition to the exam screen*/
+     // functions for the subjects
+        function quiz(subject){
+            scoreArray = [];
+            score = 0;
+            currentQuestion = 0
+            currentSubject = subject;
+            displayState.style.display = "none";
+            questionDisplay.style.display ="flex";
+            questionDisplay.style.animation ="fadein 0.5s ease"
+            backButton1.style.display = "flex"
+            backButton1.style.justifyContent = "space-between"
+            questionText.textContent = currentSubject[currentQuestion].question
+            labels[0].innerHTML = currentSubject[currentQuestion].options[0]
+
+labels[1].textContent = currentSubject[currentQuestion].options[1]
+
+labels[2].textContent = currentSubject[currentQuestion].options[2]
+
+labels[3].textContent = currentSubject[currentQuestion].options[3]
+        }
+            
+        function submitExam(){
+           let submitConfirm = confirm("Are you sure you want to submit?")
+           if (submitConfirm){
+               alert("submitted successfully");
+               questionDisplay.style.display =  "none";
+               submitPage.style.display = "flex";
+               submitPage.style.flexDirection = "column"
+               score = 0
+               for (let x = 0; x < scoreArray.length; x++){
+                   if(scoreArray[x] == currentSubject[x].answer){
+                   score = score + 1
+               }
+           } 
+           mark.textContent  = score + "/" + currentSubject.length;
+        }
+    }
+        function next(){
+          if(currentQuestion < currentSubject.length - 1){
+            currentQuestion = currentQuestion +1;
+            numberQuestion.textContent = "Question" + String(currentQuestion + 1)
+            questionText.textContent = currentSubject[currentQuestion].question
+            labels[0].textContent = currentSubject[currentQuestion].options[0]
+
+labels[1].textContent = currentSubject[currentQuestion].options[1]
+
+labels[2].textContent = currentSubject[currentQuestion].options[2]
+
+labels[3].textContent = currentSubject[currentQuestion].options[3]
+          for(let i = 0; i < labels.length; i ++){
+              labels[i].style.backgroundColor ="white"
+              if(scoreArray[currentQuestion] == labels[i].textContent){
+                  labels[i].style.backgroundColor ="green"
+              }
+          }
+            }
+          else{
+              
+          }
+        }
+        function previous(){
+            if(currentQuestion > 0){
+            currentQuestion = currentQuestion -1;
+            numberQuestion.textContent = "Question" + String(currentQuestion + 1)
+            questionText.textContent = currentSubject[currentQuestion].question
+            labels[0].textContent = currentSubject[currentQuestion].options[0]
+
+labels[1].textContent = currentSubject[currentQuestion].options[1] 
+
+labels[2].textContent = currentSubject[currentQuestion].options[2]
+
+labels[3].textContent = currentSubject[currentQuestion].options[3]
+            for(let i = 0; i < labels.length; i ++){
+              labels[i].style.backgroundColor ="white"
+              if(scoreArray[currentQuestion] == labels[i].textContent){
+                  labels[i].style.backgroundColor ="green"
+              }
+          } 
+          }
+        else{
+            
+         }
+        }
+        function choose(selected){
+                for(let i = 0; i < currentSubject[currentQuestion].options.length; i++){
+                    labels[i].style.backgroundColor ="white"
+                }
+                
+                selected.style.backgroundColor = "green"                                
+                scoreArray[currentQuestion] = selected.textContent
+        }
+        function back(){
+            submitPage.style.display = "none";
+            questionDisplay.style.display = "none";
+            displayState.style.display = "flex";
+            displayState.style.animation ="fadein 0.5s ease";
+                 
+        }
+        function home(){
+            subject.style.display = "flex";
+            subject.style.animation ="fadein 0.5s ease"
+            displayState.style.display = "none";
+              submitPage.style.display = "none";
+            questionDisplay.style.display = "none";
+            backButton1.style.display = "none";
+        }
+    </script>
+</html>
