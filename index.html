@@ -176,6 +176,17 @@
                 width:320px;
                 
             }
+            #review{
+                width:230px;
+                height:40px;
+                border:none;
+                border-radius:40px;
+                cursor:pointer;
+                transition:transform 0.7s ease;
+            }
+            #review:active{
+                transform:scale(0.97);
+            }
         </style>
     </head>
     <body>
@@ -210,7 +221,8 @@
           </div>
           <button class="submit" onclick="submitExam()">Submit</button>
        </div>
-       <div class="submitpage" id="submitpage">You scored:<span class="mark"></span>
+       <div class="submitpage" id="submitpage">You scored:<span class="mark"></span><br>
+       <button id="review" > Review missed questions</button>
        </div>
        <footer><small>Disclaimer: All questions were sourced from the Solid Solutions post-utme past questions</small></footer>
     </body>
@@ -965,7 +977,6 @@ labels[3].textContent = currentSubject[currentQuestion].options[3]
         function submitExam(){
            let submitConfirm = confirm("Are you sure you want to submit?")
            if (submitConfirm){
-               alert("submitted successfully");
                questionDisplay.style.display =  "none";
                submitPage.style.display = "flex";
                submitPage.style.flexDirection = "column"
