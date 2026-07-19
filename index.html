@@ -980,6 +980,8 @@ labels[3].textContent = currentSubject[currentQuestion].options[3]
                questionDisplay.style.display =  "none";
                submitPage.style.display = "flex";
                submitPage.style.flexDirection = "column"
+               submitPage.style.alignItems = "center"
+
                score = 0
                for (let x = 0; x < scoreArray.length; x++){
                    if(scoreArray[x] == currentSubject[x].answer){
