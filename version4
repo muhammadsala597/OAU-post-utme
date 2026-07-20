@@ -243,7 +243,7 @@
             <button onclick="quiz(chemistryQuestions);dialogBox()">Chemistry</button>
             <button onclick="quiz(biologyQuestions);dialogBox()"> Biology </button>
        </div>
-       <div id="selecttime"> choose time interval:<br><button onclick="select(900)">15min</button><button onclick="select(1800)">30min</button><button onclick="select(3600)">1hr</button><button onclick="select(5400)">1hr 30min</button><button onclick="closeDialog()">Ok</button></div>
+       <div id="selecttime"> choose time interval:<br><button onclick="select(900)">15min</button><button onclick="select(1800)">30min</button><button onclick="select(3600)">1hr</button><button onclick="select(5400)">1hr 30min</button><button onclick="closeDialog()">Start Exam</button></div>
        <div class="questions" id="questions">
          <div class="topbar">
           <span id="time">00:00</span><div><button><i class="fa-solid fa-calculator"></i></button></div>
