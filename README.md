@@ -1,65 +1,51 @@
 OAU Post UTME Tutor
 
-A lightweight web application for practicing OAU Post-UTME questions. Built with HTML, CSS, and vanilla JavaScript, the app provides a simple quiz interface that allows students to practice subject-specific questions and receive an instant score.
+# 📚 POST-UTME Practice App
 
-Features
+A responsive web application that helps students prepare for Nigerian Post-UTME examinations by practicing multiple-choice questions in a timed exam environment.
 
-- Subject selection
-- Multiple-choice questions
-- Previous and Next navigation
-- One selected answer per question
-- Selected answers remain highlighted when navigating between questions
-- Automatic score calculation
-- Submission confirmation
-- Home and Back navigation
-- Simple responsive interface
-- Smooth fade-in animations
+## ✨ Features
 
-Technologies Used
+- 📖 Multiple subjects
+- ⏱️ Selectable exam timer
+- 📝 Multiple-choice questions
+- 📊 Automatic scoring
+- 📱 Responsive design
+- 🏠 Home and Back navigation
+- 🎯 Question progress indicator
+
+## 🚀 Built With
 
 - HTML5
 - CSS3
-- Vanilla JavaScript
+- JavaScript
 
-Project Structure
+## 📸 Screenshots
 
-- Landing Page – Welcome screen with Start button.
-- Subject Selection – Choose a subject to practice.
-- Quiz Screen – Displays questions and answer choices.
-- Result Screen – Shows the final score after submission.
 
-What I Learned
 
-Building this project helped me understand:
+## 🔮 Planned Features
 
-- DOM manipulation
-- Arrays of objects
-- Event handling
-- JavaScript functions
-- Loops
-- Conditional statements
-- Updating page content dynamically
-- Managing application state (current question, selected answers, score)
-- Creating a simple single-page application without frameworks
+- 🧮 Built-in calculator
+- 🖼️ Image-based questions
+- 📅 Question year display
+- 💡 Answer explanations
+- 📈 Performance statistics
+- ⭐ Bookmark difficult questions
+- 💾 Save progress with Local Storage
 
-Future Improvements
+## ▶️ How to Use
 
-- Add hundreds of real OAU past questions.
-- Organize questions by examination year.
-- Display the year for each question.
-- Add explanations for correct answers.
-- Randomize question order.
-- Add a countdown timer.
-- Save progress using Local Storage.
-- Show performance statistics by subject.
-- Add dark mode and improved animations.
+1. Open the app in your browser.
+2. Choose a subject.
+3. Select an exam duration.
+4. Answer the questions.
+5. Submit the exam to view your score.
 
-Disclaimer
+## 👨‍💻 Author
 
-The practice questions are intended for educational purposes only. Original examination materials remain the property of their respective owners.
+**Muhammad Salawu**
 
-Author
+## 📄 License
 
-Muhammad Salawu
-
-GitHub: https://github.com/muhammadsala597
+This project is open source and available under the MIT License.
