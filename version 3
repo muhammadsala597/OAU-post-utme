@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>POST UTME APP</title>
+        <style>
+            body{
+                background-color:#003366;
+                display: flex;
+                flex-direction:column;
+                align-items: center;
+                color: white;
+            }
+            header{
+                font-size:20px;
+            }
+            img{
+                margin-top:100px;
+                
+            }
+            .intro button{
+                background-color:#C9A227;
+                border: none;
+                width:150px;
+                height:50px;
+                margin:auto;
+                margin-top:150px;
+                border-radius:20px;
+                cursor: pointer;
+                display:block;
+                animation: pulse 3s infinite ease-in-out;
+                font-size:14px;
+            }
+            @keyframes pulse{
+                0%{
+                    transform:scale(1.05);
+                }
+                50%{
+                    transform:scale(0.98);
+                }
+                100%{
+                    transform:scale(1.05);
+                }
+            }
+            @keyframes fadein{
+                from{
+                    opacity:0;
+                }
+                to{
+                    opacity:1;
+                }
+            }
+            .subjects{
+                display:none;
+                width:380px;
+                background-color:white;
+                border-radius:20px;
+                flex-direction:column;
+                align-items:center;
+                margin-top:50px; 
+            }
+            .intro{
+                display:flex;
+                flex-direction:column;
+                align-items:center;
+            }
+            .subjects button{
+                margin-bottom:20px;
+                background-color:#C9A227;
+                width:280px;
+                height:80px;
+                border:none;
+                border-radius:15px;
+                cursor:pointer;
+                transition:transform 0.5s ease;
+            }
+            .subjects button:hover{
+                transform:translate(10px) scale(1.1);
+            }
+            h4{
+                color:#003366;
+            }
+            #questions{
+                display: none;
+                flex-direction:column;
+                align-items:center;
+                margin-top:40px;
+            }
+            form{
+                width:300px;
+                background-color:white;
+                color:black;
+                padding:20px;
+                margin-top:10px;
+                margin-bottom:10px;
+                border-radius:20px;
+            }
+            label{
+                border: 1px solid #C9A227;
+                margin:5px;
+                display:flex;
+                justify-content:space-between;
+                align-items:center;
+                width:270px;
+                height:50px;
+                border-radius:10px;
+                padding:0px 5px;
+                transition: transform 0.3s;
+            }
+            label:hover{
+                transform:translate(10px) scale(1.07);
+            }
+            label:active{
+                background-color: green;
+            }
+            .buttons{
+                display:flex;
+                justify-content:space-between;
+            }
+            .controls{
+                margin:90px;
+                margin-top:10px;
+                margin-bottom:20px;
+                height:40px;
+                width:80px;
+                border:none;
+                border-radius:15px;
+                cursor:pointer;
+            }
+            .submit{
+                height:40px;
+                width:100px;
+                border:none;
+                border-radius:15px;
+                cursor:pointer;
+                margin-top:60px;
+                background-color:#C9A227;
+            }
+            .backbutton{
+                display:none;
+                border-bottom:1px solid #C9A227;
+                width:380px;
+                justify-content:space-between;
+                align-items:center;
+                box-sizing:border-box;
+                padding:20px;
+            }
+            .backbutton button{
+                width:70px;
+                height:40px;
+                margin-top:5px;
+                position:relative;
+            }
+            .submitpage{
+                display:none;
+                width:350px;
+                height:400px;
+                background-color:white;
+                color:black;
+                text-align:center;
+                font-size:20px;
+                padding:20px;
+                margin-top:60px;
+                border-radius:20px;
+            }
+            .mark{
+                font-size:59px;
+                margin-top:120px;
+            }
+            footer{
+                margin-top:200px;
+                opacity:0.7;
+            }
+            #question{
+                text-align:left;
+                line-height:1.6;
+                width:320px;
+                
+            }
+            #review{
+                width:230px;
+                height:40px;
+                border:none;
+                border-radius:40px;
+                cursor:pointer;
+                transition:transform 0.7s ease;
+            }
+            #review:active{
+                transform:scale(0.97);
+            }
+            #selecttime{
+                display:flex;
+                flex-direction:column;
+                align-items:center;
+                flex-wrap:wrap;
+                position:fixed;
+                transform:translateY(100%);
+                bottom:0;
+                center:0;
+                width:300px;
+                height:280px;
+                background-color:lightgrey;
+                border-radius:50px;
+                padding:10px 10px;
+            }
+            #selecttime button{
+                width:160px;
+                height:40px;
+                border-radius:20px;
+                margin-bottom:5px;
+                margin-top:5px;
+                border:none;
+            }
+        </style>
+    </head>
+    <body>
+       <div class="intro" id="intro">
+           <header>OAU Post Utme Tutor</header><img src="https://i.ibb.co/GfS4yFB7/oau-logo-eb5tgl.webp" alt="oau logo" width="180px">
+           <button id="start" onclick="start()">Click here to start</button>
+       </div>
+       <div id="backbutton">
+        <header class="backbutton" id="back"><button onclick="back()">Back</button><button class="home" onclick="home()">Home</button></header>
+       </div>
+       <div class="subjects" id="s1">
+            <h4>Choose your subject.</h4>
+            <button onclick="quiz(mathQuestions);dialogBox()"> Mathematics </button>
+            <button onclick="quiz(aptitudeQuestions);dialogBox()"> Aptitude </button>
+            <button onclick="quiz(physicsQuestions);dialogBox()">Physics</button>
+            <button onclick="quiz(chemistryQuestions);dialogBox()">Chemistry</button>
+            <button onclick="quiz(biologyQuestions);dialogBox()"> Biology </button>
+       </div>
+       <div id="selecttime"> choose time interval:<br><button onclick="select(900)">15min</button><button onclick="select(1800)">30min</button><button onclick="select(3600)">1hr</button><button onclick="select(5400)">1hr 30min</button><button onclick="closeDialog()">Ok</button></div>
+       <div class="questions" id="questions">
+          <span id="time">00:00</span>
+          <h3 id="numberQuestion"> Question 1</h3>
+          <img src="" alt="question image" id="question image" width="150px">
+          <p id="question"></p>
+          <form>
+             <label onclick="choose(this)" class="label">  </label><br>  
+             <label onclick="choose(this)" class="label">  </label><br>  
+             <label onclick="choose(this)" class="label">  </label><br>  
+             <label onclick="choose(this)" class="label">  </label><br>  
+          </form>  
+          <div class="buttons">
+              <button class="controls" onclick="previous()" type="button">Previous</button>
+              <button class="controls" onclick="next()" type="button"> Next </button>
+          </div>
+          <button class="submit" onclick="submitExam()">Submit</button>
+       </div>
+       <div class="submitpage" id="submitpage">You scored:<span class="mark"></span><br>
+       <button id="review" > Review missed questions</button>
+       </div>
+       <footer><small>Disclaimer: All questions were sourced from the Solid Solutions post-utme past questions</small></footer>
+    </body>
+    <script>
+    //before you go down here just know that ony Allah and i know what i wrote there so brace yourselves
+        const mathQuestions = [
+        {
+    question: "The table shows the outcome when a die is thrown a number of times. If the probability of obtaining a 3 is 0.225, how many times was the die thrown?",
+    options: ["172", "45", "200", "156"],
+    answer: "200",
+    image:"https://i.ibb.co/mmYkPWn/IMG-20260719-080702-662.webp"
+},
+{
+    question: "The 3rd and 6th terms of a Geometric Progression are 7 and 14²/₈ respectively. What is the first term?",
+    options: ["2⅔", "48", "32", "108"],
+    answer: "2⅔"
+},
+{
+    question: "1/12, 1/6, 1/3 are successive terms of an arithmetic progression. Find the value of x.",
+    options: ["1", "2/5", "2/3", "7/9"],
+    answer: "2/3"
+},
+{
+    question: "If A = {2, 3, 5, 7, 11, 15}, B = {1, 2, 3, 15}, C = {6, 12, 15} and A ∩ B ⊂ C, what is the value of x?",
+    options: ["2", "15", "3", "6"],
+    answer: "15"
+},
+{
+    question: "Simplify:",
+    image: "YOUR_SIMPLIFY_IMAGE_URL",
+    options: ["3", "2", "6", "8"],
+    answer: "2"
+},
+{
+    question: "The cross section of a uniform prism is a right-angled triangle with sides 3 cm, 4 cm and 5 cm. If its length is 10 cm, calculate the total surface area.",
+    options: ["100 cm²", "112 cm²", "106 cm²", "132 cm²"],
+    answer: "112 cm²"
+},
+{
+    question: "Differentiate 1/√x with respect to x.",
+    options: [
+        "-1/(2√x³)",
+        "-1/(2√x)",
+        "-1/(2x³)",
+        "1/(2√x)"
+    ],
+    answer: "-1/(2√x³)"
+},
+{
+    question: "What is the value of dy/dx when x = 4 for the function y = x ln(x − 3)?",
+    options: ["0", "4", "1", "1/2"],
+    answer: "4"
+},
+{
+    question: "Evaluate ∫(1/(x+2)) dx.",
+    options: ["2", "2 ln 2", "ln 2", "ln 3"],
+    answer: "ln 2"
+},
+{
+    question: "Given the matrices shown, compute 2B − A.",
+    image: "YOUR_MATRIX_IMAGE_URL",
+    options: [
+        "[4 8; 3 1]",
+        "[3 2; 1 4]",
+        "[4 7; 8 2]",
+        "[4 7; 8 3]"
+    ],
+    answer: "[4 7; 8 3]"
+}];
+
+        const aptitudeQuestions = [
+  {
+    question: "Pick out the odd one.",
+    options: ["Leopard", "Cougar", "Elephant", "Lion"],
+    answer: "Elephant"
+  },
+  {
+    question: "The biggest mammal on earth is?",
+    options: ["The Blue Whale", "The blue shark", "Elephant", "Lion"],
+    answer: "The Blue Whale"
+  },
+  {
+    question: "The killing of mother is known as?",
+    options: ["Matricide", "Patricide", "Suicide", "Homicide"],
+    answer: "Matricide"
+  },
+  {
+    question: "Who is the current royal head of England?",
+    options: ["Prince Charles", "Queen Elizabeth II", "King Charles III", "Prince Charles II"],
+    answer: "King Charles III"
+  },
+  {
+    question: "Who invented the Automated Teller Machine (ATM)?",
+    options: ["AI-8 Alexandra Bill", "John Adrian Shepherd-Barron", "George Bell", "Campbell Moore"],
+    answer: "John Adrian Shepherd-Barron"
+  },
+  {
+    question: "The Central Bank of Nigeria commenced operation in what year?",
+    options: ["1930", "1947", "1959", "1928"],
+    answer: "1959"
+  },
+  {
+    question: "The longest bridge in West Africa is?",
+    options: [
+      "Danyang-Kunshan Grand Bridge",
+      "Third Mainland Bridge",
+      "6th October Bridge",
+      "Grand MASUT Bridge"
+    ],
+    answer: "Third Mainland Bridge"
+  },
+  {
+    question: "Spanish flu occurred in what year?",
+    options: ["1939", "1915", "1924", "1918"],
+    answer: "1918"
+  },
+  {
+    question: "The last eclipse of the sun in Nigeria was observed when?",
+    options: [
+      "March 1st 2006",
+      "March 29 2006",
+      "February 1st 2005",
+      "February 29 2006"
+    ],
+    answer: "March 29 2006"
+  },
+  {
+    question: "The first country to adopt Gold Standard was?",
+    options: ["Egypt", "USA", "England", "Russia"],
+    answer: "England"
+  },
+  {
+    question: "Choose the word that is a necessary part of ovation.",
+    options: ["Outburst", "Bravo", "Applause", "Encore"],
+    answer: "Applause"
+},
+{
+    question: "Complete the sequence 1, 4, 8, 9, 27, 16, ?",
+    options: ["25", "56", "64", "18"],
+    answer: "64"
+},
+{
+    question: "Choose the word with the correct spelling.",
+    options: ["Definitelly", "definately", "definitilly", "definitely"],
+    answer: "definitely"
+},
+{
+    question: "Choose the option that is nearest in meaning to the word italicized: I suppose the old woman is vulnerable to cold.",
+    options: ["susceptible", "impervious", "immune", "injured"],
+    answer: "susceptible"
+},
+{
+    question: "FAG : GAF :: HAI : IAH?",
+    options: ["JAK", "HAL", "HAK", "JAL"],
+    answer: "HAK"
+},
+{
+    question: "Bank : River :: Coast : ?",
+    options: ["Waves", "Sea", "Beach", "Flood"],
+    answer: "Sea"
+},
+{
+    question: "What is the meaning of the words 'esprit de corps' as used in the force?",
+    options: ["Together we stand", "Spirit of solidarity", "Corporate spirit", "Strength and unity"],
+    answer: "Spirit of solidarity"
+},
+{
+    question: "The Liberation Stadium in Nigeria can be found where?",
+    options: ["Port Harcourt", "Benin", "Osun", "Lagos"],
+    answer: "Port Harcourt"
+},
+{
+    question: "The first female senator in Nigeria was?",
+    options: ["Franca Afegbua", "Patricia Etteh", "Olubunmi Fumilayo", "Bola Sholti"],
+    answer: "Franca Afegbua"
+},
+{
+    question: "Nelson Mandela was awarded the Nobel Peace Prize in?",
+    options: ["1994", "1995", "1996", "1993"],
+    answer: "1993"
+}
+];
+
+        const chemistryQuestions = [
+{
+    question: "The chemical symbol for Sodium is:",
+    options: ["So", "Na", "S", "Sn"],
+    answer: "Na"
+},
+{
+    question: "Water is made up of:",
+    options: ["H₂O", "CO₂", "O₂", "NaCl"],
+    answer: "H₂O"
+},
+{
+    question: "The pH of a neutral solution is:",
+    options: ["1", "5", "7", "14"],
+    answer: "7"
+},
+{
+    question: "The entropy will usually increase when: I. a molecule is broken into two or more smaller molecules II. a reaction occurs that results in an increase in the number of moles of a gas III. a solid changes to liquid IV. a liquid changes to gas",
+    options: [
+        "I only",
+        "II, III & IV",
+        "I & II",
+        "I, II, III & IV"
+    ],
+    answer: "I, II, III & IV"
+},
+{
+    question: "Ethanol can be oxidized stepwise. What is the first stable intermediate product when ethanol is oxidized with a mild oxidizing agent?",
+    options: [
+        "CH₃CH₂OH",
+        "CH₃COOH",
+        "CH₃CHO",
+        "CO₂"
+    ],
+    answer: "CH₃CHO"
+},
+{
+    question: "Which of the following alcohols forms a ketone when oxidized?",
+    options: [
+        "Propan-1-ol",
+        "Propan-2-ol",
+        "Methanol",
+        "Butan-1-ol"
+    ],
+    answer: "Propan-2-ol"
+},
+{
+    question: "What is the shape of the graph of pressure against volume at constant temperature?",
+    options: [
+        "Parabola",
+        "Hyperbola",
+        "A straight line",
+        "Circular"
+    ],
+    answer: "Hyperbola"
+},
+{
+    question: "Which of the following has the highest ionization energy?",
+    options: [
+        "O",
+        "N",
+        "Be",
+        "B"
+    ],
+    answer: "N"
+},
+{
+    question: "Which of the following substances has the lowest melting point?",
+    options: [
+        "SiO₂",
+        "Na₂SO₄",
+        "ZnCl₂",
+        "SO₂"
+    ],
+    answer: "SO₂"
+},
+{
+    question: "Given that the activation energy in the forward direction of an elementary step is 50 kJ and the activation energy in the reverse direction is 70 kJ, what is the energy of reaction for this step?",
+    options: [
+        "-50 kJ",
+        "50 kJ",
+        "20 kJ",
+        "-20 kJ"
+    ],
+    answer: "-20 kJ"
+},
+{
+    question: "Which hybridized carbon atoms are present in 2-methylbuta-1,3-diene?",
+    options: [
+        "sp, sp² & sp²",
+        "sp² & sp³",
+        "sp & sp²",
+        "sp & sp³"
+    ],
+    answer: "sp² & sp³"
+},
+{
+    question: "The ozonolysis of a particular alkene yields butanone and ethanal as the main organic products. The alkene is:",
+    options: [
+        "Pent-1-ene",
+        "Pent-2-ene",
+        "2-methylbut-1-ene",
+        "3-methylpent-2-ene"
+    ],
+    answer: "3-methylpent-2-ene"
+},
+{
+    question: "A particular hydrocarbon was erroneously named 3,3,4-trimethylpentane. What is the correct name?",
+    options: [
+        "2,2,3-trimethylpentane",
+        "2,3,3-trimethylpentane",
+        "2,3,4-trimethylpentane",
+        "3,3,2-trimethylpentane"
+    ],
+    answer: "2,3,3-trimethylpentane"
+},
+{
+    question: "Name the following compound:",
+    options: [
+        "6-ethyl-4-methylcyclohexene",
+        "6-ethyl-3-methylcyclohexene",
+        "3-ethyl-5-methylcyclohexene",
+        "6-ethyl-5-methylcyclohexene"
+    ],
+    image:"https://i.ibb.co/qF54TPt7/IMG-20260719-073845-597.webp",
+    answer: "6-ethyl-3-methylcyclohexene"
+},
+{
+    question: "What is the expression for the solubility (S) of a sparingly soluble salt in terms of its solubility product constant (Ksp)?",
+    options: [
+        "S = Ksp",
+        "S = √Ksp",
+        "S = Ksp²",
+        "S = 2Ksp"
+    ],
+    answer: "S = √Ksp"
+},
+{
+    question: "A commercial solvent, dimethyl sulfoxide (DMSO), reacts with dimethyl sulfide according to the reaction shown. If this proceeds as written, which substance could be acting as the oxidizing agent?",
+    options: [
+        "O₂",
+        "Dimethyl sulfide",
+        "Dimethyl sulfoxide",
+        "Both O₂ and dimethyl sulfoxide"
+    ],
+    answer: "O₂"
+},
+{
+    question: "If 5.0 g of potassium permanganate reacts completely according to the equation shown, what is the limiting reagent?",
+    options: [
+        "KMnO₄",
+        "HCl",
+        "H₂O",
+        "KCl"
+    ],
+    answer: "HCl"
+}
+];
+       const physicsQuestions = [
+  {
+    question: "An object of mass 0.5 kg is attached to a spring with spring constant 100 N/m. If stretched 0.5 m from the equilibrium position and released, what is its maximum speed?",
+    options: ["5√5 m/s", "5√2 m/s", "√5 m/s", "√2 m/s"],
+    answer: "5√5 m/s"
+  },
+  {
+    question: "What percentage of the total energy is kinetic energy in a simple harmonic motion when the displacement is one-half the amplitude?",
+    options: ["75%", "50%", "25%", "100%"],
+    answer: "75%"
+  },
+  {
+    question: "A balloon contains 500 m³ of helium at 27°C and 1 atm pressure. What is the volume of the helium at a pressure of 0.5 atm, where the pressure is 0.5 atm and the temperature is -3°C?",
+    options: ["1200 m³", "900 m³", "250 m³", "1000 m³"],
+    answer: "900 m³"
+  },
+  {
+    question: "If A = qV and B = F/q, which relationship is necessary?",
+    options: [
+      "F must be perpendicular to B",
+      "F must be perpendicular to B but not necessarily to V",
+      "V must be perpendicular to B but not necessarily to F",
+      "All three vectors must be mutually perpendicular"
+    ],
+    answer: "All three vectors must be mutually perpendicular"
+  },
+  {
+    question: "Two small charged objects repel each other with a force F when separated by a distance r. If the charge on each object is reduced to one-fourth its original value and the distance between them is reduced to r/2, the force becomes?",
+    options: ["F", "F/2", "F/4", "F/8"],
+    answer: "F/4"
+  },
+  {
+    question: "Two point charges 8 × 10⁻⁹ C and -2 × 10⁻⁹ C are separated by 4 m. The electric field magnitude midway between them is? (k = 9 × 10⁹)",
+    options: ["22.5 V/m", "3.6 × 10⁻⁸ V/m", "13.5 V/m", "155,000 V/m"],
+    answer: "22.5 V/m"
+  },
+  {
+    question: "Two wires made of the same material have the same length but different diameters. They are connected to a battery. The quantity that is NOT the same for the wires is?",
+    options: [
+      "The end-to-end potential difference",
+      "The current",
+      "The current density",
+      "The electric field"
+    ],
+    answer: "The current"
+  },
+  {
+    question: "Each plate of a capacitor stores a charge of magnitude 1 × 10⁻³ C. When a 100 V potential difference is applied, the capacitance is?",
+    options: ["50 μF", "100 μF", "10 μF", "5 μF"],
+    answer: "10 μF"
+  },
+  {
+    question: "The capacitance of a parallel-plate capacitor can be increased by:",
+    options: [
+      "Increasing the plate separation",
+      "Decreasing the plate separation",
+      "Increasing the plate area",
+      "Decreasing the plate area"
+    ],
+    answer: "Increasing the plate area"
+  },
+  {
+    question: "A 2 Ω resistor and a 4 Ω resistor are connected in parallel to a 6 V battery. The power dissipated by the 2 Ω resistor is:",
+    options: ["8 W", "6 W", "-6 W", "18 W"],
+    answer: "18 W"
+  },
+  {
+    question: "A lens of focal length 15.0 cm forms an upright image four times the size of an object. Determine the distance of the image from the lens.",
+    options: ["2.0 cm", "4.0 cm", "15.0 cm", "25.0 cm"],
+    answer: "4.0 cm"
+},
+{
+    question: "How much heat is required to melt 20 g of ice at 0°C to water at the same temperature? (Specific latent heat of ice = 336 Jg⁻¹)",
+    options: [
+        "8.06 × 10³ J",
+        "7.06 × 10³ J",
+        "6.72 × 10³ J",
+        "5.38 × 10³ J"
+    ],
+    answer: "6.72 × 10³ J"
+},
+{
+    question: "Determine the time taken to heat 2 kg of water from 20°C to 100°C in an electric kettle taking 5 A from a 210 V mains supply. (Specific heat capacity of water = 4200 Jkg⁻¹K⁻¹)",
+    options: [
+        "10.25 minutes",
+        "10.57 minutes",
+        "10.67 minutes",
+        "10.75 minutes"
+    ],
+    answer: "10.67 minutes"
+},
+{
+    question: "A ray of light passes from air to water to glass to air. Given that the refractive index of light passing from air to water is 4/3 and air to glass is 3/2, calculate the refractive index of glass relative to water.",
+    options: ["0.50", "0.67", "0.75", "1.13"],
+    answer: "1.13"
+},
+{
+    question: "In the formation of sea breeze, wind blows from",
+    options: [
+        "Sky to land",
+        "Sea to sky",
+        "Land to sea",
+        "Sea to land"
+    ],
+    answer: "Sea to land"
+},
+{
+    question: "The flow of blood in the human body is based on the heat transfer process known as",
+    options: [
+        "Heat conduction",
+        "Heat convection",
+        "Heat radiation",
+        "Thermal expansion"
+    ],
+    answer: "Heat convection"
+},
+{
+    question: "A car of mass M kg is accelerated uniformly from rest by an engine of power P. The minimum time it will take to attain a speed V is",
+    options: [
+        "MV/(2P²)",
+        "MV²/(2P)",
+        "M²V/(2P)",
+        "M/(2P)"
+    ],
+    answer: "MV²/(2P)"
+},
+{
+    question: "A 1800 kg car stopped at a traffic light is struck from the rear by a 450 kg car. The two cars become entangled and move in the direction of the second car at 20 m/s before the collision. What is the final velocity of the combined cars?",
+    options: ["4 m/s", "16 m/s", "6 m/s", "8 m/s"],
+    answer: "4 m/s"
+},
+{
+    question: "A 75 kg man standing in an elevator notes that as the elevator rises, the scale reads 825 N. What is the acceleration of the elevator? (g = 9.8 m/s²)",
+    options: [
+        "1 m/s² downward",
+        "1 m/s² upward",
+        "1.2 m/s² upward",
+        "1.2 m/s² downward"
+    ],
+    answer: "1.2 m/s² upward"
+},
+{
+    question: "A 7.80 g bullet moving at 575 m/s penetrates a tree trunk to a depth of 5.50 cm. Determine the average frictional force that stops the bullet.",
+    options: [
+        "3.45 × 10⁴ N",
+        "2.34 × 10⁴ N",
+        "2.58 × 10⁴ N",
+        "5.25 × 10⁴ N"
+    ],
+    answer: "2.34 × 10⁴ N"
+}
+];
+
+
+        const biologyQuestions = [
+  {
+    question: "What is the function of the Kreb's cycle in cellular respiration?",
+    options: [
+      "Utilization of ATP",
+      "Oxidation of glucose",
+      "Synthesis of glucose",
+      "Production of NADH and FADH2"
+    ],
+    answer: "Production of NADH and FADH2"
+  },
+  {
+    question: "In which phase of mitosis do sister chromatids separate and move to opposite poles of the cell?",
+    options: [
+      "Prophase",
+      "Metaphase",
+      "Anaphase",
+      "Telophase"
+    ],
+    answer: "Anaphase"
+  },
+  {
+    question: "Which of the following is an example of a parasitic relationship?",
+    options: [
+      "Bee pollinating a flower",
+      "Lion hunting a zebra",
+      "Tapeworm living in the intestines of a mammal",
+      "Algae and fungi in lichens"
+    ],
+    answer: "Tapeworm living in the intestines of a mammal"
+  },
+  {
+    question: "Which of the following is not a type of muscle tissue in the human body?",
+    options: [
+      "Skeletal",
+      "Cardiac",
+      "Smooth",
+      "Nervous"
+    ],
+    answer: "Nervous"
+  },
+  {
+    question: "Which of the following is a characteristic of a population in Hardy-Weinberg equilibrium?",
+    options: [
+      "Genetic drift",
+      "Mutation",
+      "Migration",
+      "No change in allele frequencies over time"
+    ],
+    answer: "No change in allele frequencies over time"
+  },
+  {
+    question: "Which of the following is not a type of ecological succession?",
+    options: [
+      "Primary succession",
+      "Secondary succession",
+      "Tertiary succession",
+      "None"
+    ],
+    answer: "Tertiary succession"
+  },
+  {
+    question: "The role of the Calvin cycle in photosynthesis is:",
+    options: [
+      "Production of ATP",
+      "Splitting of water",
+      "Fixation of carbon dioxide",
+      "None"
+    ],
+    answer: "Fixation of carbon dioxide"
+  },
+  {
+    question: "The following are functions of the integumentary system except:",
+    options: [
+      "Regulation of body temperature",
+      "Protection against pathogens",
+      "Production of hormones",
+      "Sensation of touch"
+    ],
+    answer: "Production of hormones"
+  },
+  {
+    question: "Which of the following is not a feature of the kingdom Fungi?",
+    options: [
+      "Autotrophic nutrition",
+      "Heterotrophic nutrition",
+      "Presence of cell walls made of chitin",
+      "Absorption of nutrients"
+    ],
+    answer: "Autotrophic nutrition"
+  },
+  {
+    question: "Equalization of air pressure between the middle ear and the environment is through the:",
+    options: [
+      "Tympanic membrane",
+      "Cochlea",
+      "Eustachian tube",
+      "Ear ossicles"
+    ],
+    answer: "Eustachian tube"
+  },
+  {
+  question: "The semilunar valves in the heart:",
+  options: [
+    "Prevent backflow of blood into the atria",
+    "Regulate blood pressure",
+    "Regulate heart rate",
+    "Transmit electrical signals between chambers"
+  ],
+  answer: "Prevent backflow of blood into the atria"
+},
+{
+  question: "Which of the following enzymes is responsible for unwinding DNA strands during DNA replication?",
+  options: [
+    "DNA polymerase",
+    "Helicase",
+    "RNA polymerase",
+    "Ligase"
+  ],
+  answer: "Helicase"
+},
+{
+  question: "What is the role of the enzyme RuBisCo in photosynthesis?",
+  options: [
+    "Fixation of carbon dioxide",
+    "Splitting of water molecules",
+    "Synthesis of glucose",
+    "Absorption of light energy"
+  ],
+  answer: "Fixation of carbon dioxide"
+},
+{
+  question: "Which of the following cell types is responsible for bone resorption in the skeletal system?",
+  options: [
+    "Osteoblasts",
+    "Osteocytes",
+    "Osteoclasts",
+    "Chondrocytes"
+  ],
+  answer: "Osteoclasts"
+},
+{
+  question: "What is the role of the enzyme reverse transcriptase in retroviruses?",
+  options: [
+    "Synthesis of RNA from DNA",
+    "Synthesis of DNA from RNA",
+    "Cleavage of DNA",
+    "Repair of DNA"
+  ],
+  answer: "Synthesis of DNA from RNA"
+},{
+  question: "Which of the following cell types is responsible for synthesizing myelin in the central nervous system?",
+  options: [
+    "Astrocytes",
+    "Oligodendrocytes",
+    "Microglia",
+    "Schwann cells"
+  ],
+  answer: "Oligodendrocytes"
+},
+{
+  question: "Which of the following is/are not true of asexual reproduction?",
+  options: [
+    "Involves the fusion of gametes",
+    "Offspring genetically identical to parent",
+    "Common in plants",
+    "Faster than sexual reproduction"
+  ],
+  answer: "Involves the fusion of gametes"
+},
+{
+  question: "Phenotype is determined by:",
+  options: [
+    "Genotype only",
+    "Environment only",
+    "Both genotype and environment",
+    "Neither genotype nor environment"
+  ],
+  answer: "Both genotype and environment"
+},
+{
+  question: "Which of the following is the correct sequence of events in cellular respiration?",
+  options: [
+    "Glycolysis → Electron transport chain → Kreb's cycle",
+    "Kreb's cycle → Glycolysis → Electron transport chain",
+    "Glycolysis → Kreb's cycle → Electron transport chain",
+    "Kreb's cycle → Electron transport chain → Glycolysis"
+  ],
+  answer: "Glycolysis → Kreb's cycle → Electron transport chain"
+},
+{
+  question: "Which of the following is a characteristic of anaerobic respiration?",
+  options: [
+    "It occurs only in the presence of oxygen",
+    "It produces carbon dioxide and water as by-products",
+    "It does not require oxygen",
+    "It results in a higher yield of ATP compared to aerobic respiration"
+  ],
+  answer: "It does not require oxygen"
+}
+];
+        const labels = document.querySelectorAll("label");
+        let displayState = document.getElementById("s1");
+        let subject = document.getElementById("intro");
+        let questionDisplay = document.getElementById("questions");
+        let questionText = document.getElementById("question")
+        let numberQuestion = document.getElementById("numberQuestion")
+        let backButton = document.getElementById("back")
+        let backButton1 = document.querySelector(".backbutton")
+        let submitPage = document.getElementById("submitpage")
+        let label = document.querySelectorAll("label")
+        let mark = document.querySelector(".mark")
+        let image = document.getElementById("question image")
+        let time = document.getElementById("time");
+        let selectTime = document.getElementById("selecttime")
+        let timeRemaining = 0;
+        let score = 0;
+        let scoreArray = [];
+        let currentQuestion = 0;
+        let currentSubject;
+    /* to transition to the selection screen*/
+        function start(){
+            displayState.style.display = "flex";
+            displayState.style.animation ="fadein 0.5s ease"
+            subject.style.display = "none";
+            backButton1.style.display = "flex";
+            backButton1.style.justifyContent = "space-between"
+        }
+     /* to transition to the exam screen*/
+     // functions for the subjects
+        function quiz(subject){
+            scoreArray = [];
+            score = 0;
+            currentQuestion = 0
+            currentSubject = subject;
+            displayState.style.display = "none";
+            questionDisplay.style.display ="flex";
+            questionDisplay.style.animation ="fadein 0.5s ease"
+            backButton1.style.display = "flex"
+            backButton1.style.justifyContent = "space-between"
+            if(currentSubject[currentQuestion].image){
+                image.src = currentSubject[currentQuestion].image
+                image.style.display = "block"
+                }
+            else{
+                image.style.display = "none";
+            }
+            questionText.textContent = currentSubject[currentQuestion].question
+            labels[0].innerHTML = currentSubject[currentQuestion].options[0]
+
+labels[1].textContent = currentSubject[currentQuestion].options[1]
+
+labels[2].textContent = currentSubject[currentQuestion].options[2]
+
+labels[3].textContent = currentSubject[currentQuestion].options[3]
+        }
+            
+        function submitExam(){
+           let submitConfirm = confirm("Are you sure you want to submit?")
+           if (submitConfirm){
+               questionDisplay.style.display =  "none";
+               submitPage.style.display = "flex";
+               submitPage.style.flexDirection = "column"
+               submitPage.style.alignItems = "center"
+               score = 0
+               for (let x = 0; x < scoreArray.length; x++){
+                   if(scoreArray[x] == currentSubject[x].answer){
+                   score = score + 1
+               }
+           } 
+           mark.textContent  = score + "/" + currentSubject.length;
+        }
+    }
+        function next(){
+          if(currentQuestion < currentSubject.length - 1){
+            currentQuestion = currentQuestion +1;
+            numberQuestion.textContent = "Question " + String(currentQuestion + 1) + "/ " + String(currentSubject.length)
+            if(currentSubject[currentQuestion].image){
+                image.src = currentSubject[currentQuestion].image
+                image.style.display = "block"
+                }
+            else{
+                image.style.display = "none";
+            }
+            questionText.textContent = currentSubject[currentQuestion].question
+            labels[0].textContent = currentSubject[currentQuestion].options[0]
+
+labels[1].textContent = currentSubject[currentQuestion].options[1]
+
+labels[2].textContent = currentSubject[currentQuestion].options[2]
+
+labels[3].textContent = currentSubject[currentQuestion].options[3]
+          for(let i = 0; i < labels.length; i ++){
+              labels[i].style.backgroundColor ="white"
+              if(scoreArray[currentQuestion] == labels[i].textContent){
+                  labels[i].style.backgroundColor ="green"
+              }
+          }
+            }
+          else{
+              
+          }
+        }
+        function previous(){
+            if(currentQuestion > 0){
+            currentQuestion = currentQuestion -1;
+            numberQuestion.textContent = "Question " + String(currentQuestion + 1) + "/ " + String(currentSubject.length)
+            if(currentSubject[currentQuestion].image){
+                image.src = currentSubject[currentQuestion].image
+                image.style.display = "block"
+                }
+            else{
+                image.style.display = "none";
+            }
+            questionText.textContent = currentSubject[currentQuestion].question
+            labels[0].textContent = currentSubject[currentQuestion].options[0]
+
+labels[1].textContent = currentSubject[currentQuestion].options[1] 
+
+labels[2].textContent = currentSubject[currentQuestion].options[2]
+
+labels[3].textContent = currentSubject[currentQuestion].options[3]
+            for(let i = 0; i < labels.length; i ++){
+              labels[i].style.backgroundColor ="white"
+              if(scoreArray[currentQuestion] == labels[i].textContent){
+                  labels[i].style.backgroundColor ="green"
+              }
+          } 
+          }
+        else{
+            
+         }
+        }
+        function choose(selected){
+                for(let i = 0; i < currentSubject[currentQuestion].options.length; i++){
+                    labels[i].style.backgroundColor ="white"
+                }
+                
+                selected.style.backgroundColor = "green"                                
+                scoreArray[currentQuestion] = selected.textContent
+        }
+        function back(){
+            submitPage.style.display = "none";
+            questionDisplay.style.display = "none";
+            displayState.style.display = "flex";
+            displayState.style.animation ="fadein 0.5s ease";
+                 
+        }
+        function home(){
+            subject.style.display = "flex";
+            subject.style.animation ="fadein 0.5s ease"
+            displayState.style.display = "none"
+              submitPage.style.display = "none";
+            questionDisplay.style.display = "none";
+            backButton1.style.display = "none";
+            selectTime.style.transform = "translateY(100%)"
+        }
+        function dialogBox(){
+            selectTime.style.display = "flex"
+            selectTime.style.transform = "translateY(-100px)"
+        }
+        function closeDialog(){
+            selectTime.style.transform = "translateY(100%)"
+        }
+        function select(seconds){
+            timeRemaining = seconds
+            time.textContent = String(Math.floor(seconds/60)) + ":" + String(seconds % 60).padStart(2, "0")
+            setInterval(updateTime, 1000)
+        }
+        function updateTime(){
+           timeRemaining--
+           time.textContent = String(Math.floor(timeRemaining/60)) + ":" + String(timeRemaining % 60).padStart(2, "0")
+           if (timeRemaining === 0){
+               submitExam()
+           } 
+        }
+            
+    </script>
+</html>
