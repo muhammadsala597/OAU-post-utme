@@ -1180,7 +1180,7 @@ labels[3].textContent = currentSubject[currentQuestion].options[3]
             questionDisplay.style.display = "none";
             displayState.style.display = "flex";
             displayState.style.animation ="fadein 0.5s ease";
-                 
+            selectTime.style.transform = "translateY(100%)"     
         }
         function home(){
             subject.style.display = "flex";
