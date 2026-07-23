@@ -13,6 +13,7 @@ A responsive web application that helps students prepare for Nigerian Post-UTME 
 - 📱 Responsive design
 - 🏠 Home and Back navigation
 - 🎯 Question progress indicator
+- 🖼️ image based questions 
 
 ## 🚀 Built With
 
@@ -20,14 +21,11 @@ A responsive web application that helps students prepare for Nigerian Post-UTME 
 - CSS3
 - JavaScript
 
-## 📸 Screenshots
-
 
 
 ## 🔮 Planned Features
 
 - 🧮 Built-in calculator
-- 🖼️ Image-based questions
 - 📅 Question year display
 - 💡 Answer explanations
 - 📈 Performance statistics
