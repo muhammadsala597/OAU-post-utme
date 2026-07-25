@@ -1868,11 +1868,11 @@ labels[3].textContent = currentSubject[currentQuestion].options[3]
     alert("No missed or skipped questions to review! Congratulations!");
 } 
             if(reviewArray[reviewIndex].image){
-                image.src = reviewArray[reviewIndex].image
-                review Question Image.style.display = "block"
+                reviewQuestionImage.src = reviewArray[reviewIndex].image
+                reviewQuestionImage.style.display = "block"
                 }
             else{
-                review Question Image.style.display = "none";
+                reviewQuestionImage.style.display = "none";
             }
   reviewQuestionQuestion.textContent = reviewArray[reviewIndex].question
             for(let j = 0; j < 4; j++){
@@ -1887,8 +1887,8 @@ labels[3].textContent = currentSubject[currentQuestion].options[3]
             if(reviewIndex < reviewArray.length - 1){
                 reviewIndex++
             if(reviewArray[reviewIndex].image){
-                image.src = reviewArray[reviewIndex].image
-                review Question Image.style.display = "block"
+                reviewQuestionImage.src = reviewArray[reviewIndex].image
+                reviewQuestionImage.style.display = "block"
                 }
             else{
                 review Question Image.style.display = "none";
@@ -1905,11 +1905,11 @@ labels[3].textContent = currentSubject[currentQuestion].options[3]
             if(reviewIndex > 0){
                 reviewIndex--
             if(reviewArray[reviewIndex].image){
-                image.src = reviewArray[reviewIndex].image
-                review Question Image.style.display = "block"
+                reviewQuestionImage.src = reviewArray[reviewIndex].image
+                reviewQuestionImage.style.display = "block"
                 }
             else{
-                review Question Image.style.display = "none";
+                reviewQuestionImage.style.display = "none";
             } reviewQuestionQuestion.textContent = reviewArray[reviewIndex].question
             for(let j = 0; j < 4; j++){
                  label1[j].style.backgroundColor =""
