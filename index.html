@@ -1642,6 +1642,7 @@ year:""
         let label1 = document.querySelectorAll(".label1")
         let reviewNextButton = document.getElementById("reviewNext")
         let reviewPreviousButton = document.getElementById("reviewPrevious")
+        let reviewQuestionImage = document.getElementById("reviewQuestionImage")
         let reviewArray = []
         let interval;
         let timeRemaining = 0;
@@ -1868,10 +1869,10 @@ labels[3].textContent = currentSubject[currentQuestion].options[3]
 } 
             if(reviewArray[reviewIndex].image){
                 image.src = reviewArray[reviewIndex].image
-                image.style.display = "block"
+                review Question Image.style.display = "block"
                 }
             else{
-                image.style.display = "none";
+                review Question Image.style.display = "none";
             }
   reviewQuestionQuestion.textContent = reviewArray[reviewIndex].question
             for(let j = 0; j < 4; j++){
@@ -1887,10 +1888,10 @@ labels[3].textContent = currentSubject[currentQuestion].options[3]
                 reviewIndex++
             if(reviewArray[reviewIndex].image){
                 image.src = reviewArray[reviewIndex].image
-                image.style.display = "block"
+                review Question Image.style.display = "block"
                 }
             else{
-                image.style.display = "none";
+                review Question Image.style.display = "none";
             } reviewQuestionQuestion.textContent = reviewArray[reviewIndex].question
             for(let j = 0; j < 4; j++){
                  label1[j].style.backgroundColor =""
@@ -1905,10 +1906,10 @@ labels[3].textContent = currentSubject[currentQuestion].options[3]
                 reviewIndex--
             if(reviewArray[reviewIndex].image){
                 image.src = reviewArray[reviewIndex].image
-                image.style.display = "block"
+                review Question Image.style.display = "block"
                 }
             else{
-                image.style.display = "none";
+                review Question Image.style.display = "none";
             } reviewQuestionQuestion.textContent = reviewArray[reviewIndex].question
             for(let j = 0; j < 4; j++){
                  label1[j].style.backgroundColor =""
