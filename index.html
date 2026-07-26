@@ -217,7 +217,11 @@
                 transition: transform 1s
             }
             .time:active{
-                transform:scale(1.07)
+                transform:scale(1.07);
+                background-color:green;
+            }
+            .time:hover{
+                transform:scale(1.07);
             }
             .topbar{
                 display:flex;
@@ -327,7 +331,7 @@
                <td id="skipped"></td>
            </tr>
        </table>
-       <button id="review" onclick="reviewQuestion()"> Review missed questions</button><small style="font-size:10px">(coming soon!)</small>
+       <button id="review" onclick="reviewQuestion()"> Review missed questions</button>
        </div>
        <div class="review">
            <h3> Question </h3>
@@ -1891,7 +1895,7 @@ labels[3].textContent = currentSubject[currentQuestion].options[3]
                 reviewQuestionImage.style.display = "block"
                 }
             else{
-                review Question Image.style.display = "none";
+                reviewQuestionImage.style.display = "none";
             } reviewQuestionQuestion.textContent = reviewArray[reviewIndex].question
             for(let j = 0; j < 4; j++){
                  label1[j].style.backgroundColor =""
