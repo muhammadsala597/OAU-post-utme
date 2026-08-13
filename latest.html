@@ -1,0 +1,4215 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+        <link href="https://fonts.cdnfonts.com/css/digital-7-mono" rel="stylesheet">
+        <title>POST UTME APP</title>
+        <style>
+            body{
+                background-color:#003366;
+                display: flex;
+                flex-direction:column;
+                align-items: center;
+                color: white;
+            }
+            header{
+                font-size:20px;
+            }
+            img{
+                margin-top:100px;
+                
+            }
+            .intro button{
+                background-color:#C9A227;
+                border: none;
+                width:150px;
+                height:50px;
+                margin:auto;
+                margin-top:150px;
+                border-radius:20px;
+                cursor: pointer;
+                display:block;
+                animation: pulse 3s infinite ease-in-out;
+                font-size:14px;
+            }
+            @keyframes pulse{
+                0%{
+                    transform:scale(1.05);
+                }
+                50%{
+                    transform:scale(0.98);
+                }
+                100%{
+                    transform:scale(1.05);
+                }
+            }
+            @keyframes fadein{
+                from{
+                    opacity:0;
+                }
+                to{
+                    opacity:1;
+                }
+            }
+            .subjects{
+                display:none;
+                width:90%;
+                max-width:380px;
+                background-color:white;
+                border-radius:20px;
+                flex-direction:column;
+                align-items:center;
+                margin-top:50px; 
+            }
+            .intro{
+                display:flex;
+                flex-direction:column;
+                align-items:center;
+            }
+            .subjects button{
+                margin-bottom:20px;
+                background-color:#C9A227;
+                width:280px;
+                height:80px;
+                border:none;
+                border-radius:15px;
+                cursor:pointer;
+                transition:transform 0.5s ease;
+            }
+            .subjects button:hover{
+                transform:translate(10px) scale(1.1);
+            }
+            h4{
+                color:#003366;
+            }
+            #questions{
+                display: none;
+                flex-direction:column;
+                align-items:center;
+                margin-top:40px;
+            }
+            form{
+                width:300px;
+                background-color:white;
+                color:black;
+                padding:20px;
+                margin-top:10px;
+                margin-bottom:10px;
+                border-radius:20px;
+            }
+            label{
+                border: 1px solid #C9A227;
+                margin:5px;
+                display:flex;
+                justify-content:space-between;
+                align-items:center;
+                width:270px;
+                height:50px;
+                border-radius:10px;
+                padding:0px 5px;
+                transition: transform 0.3s;
+            }
+            label:hover{
+                transform:translate(10px) scale(1.07);
+            }
+            label:active{
+                background-color: green;
+            }
+            .buttons{
+                display:flex;
+                justify-content:space-between;
+            }
+            .controls{
+                margin:90px;
+                margin-top:10px;
+                margin-bottom:20px;
+                height:40px;
+                width:80px;
+                border:none;
+                border-radius:15px;
+                cursor:pointer;
+            }
+            .submit{
+                height:40px;
+                width:100px;
+                border:none;
+                border-radius:15px;
+                cursor:pointer;
+                margin-top:40px;
+                background-color:#C9A227;
+            }
+            .backbutton{
+                display:none;
+                border-bottom:1px solid #C9A227;
+                width:380px;
+                justify-content:space-between;
+                align-items:center;
+                box-sizing:border-box;
+                padding:20px;
+            }
+            .backbutton button{
+                width:70px;
+                height:40px;
+                margin-top:5px;
+                position:relative;
+            }
+            .submitpage{
+                display:none;
+                width:90%;
+                max-width:350px;
+                height:500px;
+                background-color:white;
+                color:black;
+                text-align:center;
+                font-size:20px;
+                padding:20px;
+                margin-top:60px;
+                border-radius:20px;
+            }
+            .mark, #percentage{
+                font-size:59px;
+                margin-top:30px;
+            }
+            footer{
+                margin-top:150px;
+                opacity:0.7;
+            }
+            #question{
+                text-align:left;
+                line-height:1.6;
+                width:320px;
+                
+            }
+            #review{
+                width:230px;
+                height:40px;
+                border:none;
+                border-radius:40px;
+                cursor:pointer;
+                transition:transform 0.7s ease;
+                margin-top:20px;
+            }
+            #review:active{
+                transform:scale(0.97);
+            }
+            #selecttime{
+                display:flex;
+                flex-direction:column;
+                align-items:center;
+                flex-wrap:wrap;
+                position:fixed;
+                transform:translateY(100%);
+                bottom:0;
+                width:300px;
+                height:280px;
+                background-color:lightgrey;
+                border-radius:50px;
+                padding:10px 10px;
+                transition: transform 0.7s ease;
+            }
+            #selecttime button{
+                width:160px;
+                height:40px;
+                border-radius:20px;
+                margin-bottom:5px;
+                margin-top:5px;
+                border:none;
+            }
+            .time{
+                transition: transform 1s
+            }
+            .time:active{
+                transform:scale(1.07);
+                background-color: green;
+            }
+            .topbar{
+                display:flex;
+                justify-content:center;
+                align-items:flex-end;
+                gap:150px;
+            }
+            i{
+                font-size:24px;
+                color:black;
+            }
+            #time{
+                font-size:22px;
+            }
+            table, tr, td, th{
+                border-collapse:collapse;
+                border:1px solid black;
+                padding:3px 5px;
+            }
+            .calculator{
+                display:none;
+                position: fixed;
+                z-index:1000;
+                top :50%;
+                left:50%;
+                transform: translate(-50%, -50%);
+                width:90%;
+                max-width:340px;
+                padding:15px;
+                box-sizing: border-box;
+            }
+            #progress{
+                height:25px;
+            }
+            .review{
+                display:none;
+                flex-direction:column;
+                align-items:center;
+                margin-top:40px;
+            }
+            .reviewcontrols{
+                display:flex;
+                width:340px;
+                justify-content: space-between;
+            }
+            #reviewPrevious, #reviewNext{
+                height:40px;
+                width:80px;
+                border:none;
+                border-radius:15px;
+                cursor:pointer; 
+            }
+            .container{
+                width:100%;
+                background-color:#0F172A;
+                display:grid;
+                grid-template-columns: 1fr 1fr 1fr 1fr;
+                padding:10px 10px;
+                gap:10px;
+                border-radius:20px;
+                margin:auto;
+            }
+            .calculator button{
+                background-color:#2563EB;
+                color:white;
+                cursor:pointer;
+                border:none;
+                border-radius:40px;
+                width:100%;
+                height:60px;
+                font-size:20px;
+                transition:transform 0.2s; 
+                user-select:none;  
+            }
+            button:active{
+                transform:scale(0.95);
+            }
+            .display{
+                grid-column: 1 / 5;
+                overflow-x: auto;
+                overflow-y: hidden;
+                white-space:nowrap;
+                background:white;
+                color:black;
+                height:60px;
+                margin:10px;
+                padding:5px 10px;
+                border-radius:10px;
+                text-align:right;
+                font-size:38px;
+                font-family:"Digital-7 Mono", monospace;
+                user-select:none;
+            }
+            .calculator .operator1{
+                background-color:green;
+            }
+            .calculator .operator2,.calculator .operator3,.calculator .operator4,.calculator .operator6{
+                background-color:#F59E0B;
+            }
+            .calculator .operator5{
+                background-color:#EF4444;
+            }
+            .calculator .operator7{
+                background-color:lightgrey;
+                color:black;
+                transition: transform 0.4s;
+            }
+            .operator7:active{
+                transform:scale(0.95)  rotate(20deg);
+            }
+            .explanation{
+                white-space: pre-line;
+                color:white;
+            }
+        </style>
+    </head>
+    <body>
+       <div class="intro" id="intro">
+           <header>OAU Post Utme Tutor</header><img src="https://i.ibb.co/GfS4yFB7/oau-logo-eb5tgl.webp" alt="oau logo" width="180px">
+           <button id="start" onclick="start()">Click here to start</button>
+       </div>
+       <div id="backbutton">
+        <header class="backbutton" id="back"><button onclick="back()">Back</button><button class="home" onclick="home()">Home</button></header>
+       </div>
+       <div class="subjects" id="s1">
+            <h4>Choose your subject.</h4>
+            <button onclick="quiz(mathQuestions);dialogBox()"> Mathematics </button>
+            <button onclick="quiz(aptitudeQuestions);dialogBox()"> Aptitude </button>
+            <button onclick="quiz(physicsQuestions);dialogBox()">Physics</button>
+            <button onclick="quiz(chemistryQuestions);dialogBox()">Chemistry</button>
+            <button onclick="quiz(biologyQuestions);dialogBox()"> Biology </button>
+       </div>
+       <div id="selecttime"> choose time interval:<br><button onclick="select(900)" class="time">15min</button><button onclick="select(1800)" class="time">30min</button><button onclick="select(3600)" class="time">1hr</button><button onclick="select(5400)" class="time">1hr 30min</button><button onclick="closeDialog()" class="time">Start Exam</button></div>
+       <div class="questions" id="questions">
+         <div class="topbar">
+          <span id="time">00:00</span><div><button onclick="calc()"><i class="fa-solid fa-calculator"></i></button></div>
+         </div>
+         <div class="calculator" id="calculator">
+           <button onclick="closeCalc()" style="width:40px;
+    height:40px;
+    border:none;
+    border-radius:50%;
+    background:#EF4444;
+    color:white;
+    cursor:pointer;
+    font-size:18px;">×</button>
+           <div class="container">
+            <div class="display" id="display">0</div>
+            <button onclick="output(7)">7</button>
+            <button onclick="output(8)">8</button>
+            <button onclick="output(9)">9</button>
+            <button class="operator1" onclick="calcDelete()">DEL</button>
+            <button onclick="output(4)">4</button>
+            <button onclick="output(5)">5</button>
+            <button onclick="output(6)">6</button>
+            <button class="operator2" onclick="output('/')">/</button>
+            <button onclick="output(1)">1</button>
+            <button onclick="output(2)">2</button>
+            <button onclick="output(3)">3</button>
+            <button class="operator3" onclick="output('*')">*</button>
+            <button onclick="output('.')">.</button>
+            <button onclick="output('00')">00</button>
+            <button onclick="output(0)">0</button>
+            <button class="operator4" onclick="output('-')">-</button>
+            <button onclick="output('(')">(</button>
+            <button onclick="output(')')">)</button>
+            <button onclick="output('3.14159')">π</button>
+            <button class="operator6" onclick="output('+')">+</button>
+            <button class="operator5" onclick="clearScreen()">CE</button>
+            <button onclick="changeSign()">±</button>
+            <button onclick="sqrt()">√</button>
+            <button class="operator7" onclick="calculatorAnswer()">=</button>
+          </div>
+         </div>
+          <h3 id="numberQuestion"></h3>
+          <progress min="0" max="0" id="progress" value=""></progress>
+          <img src="" alt="question image" id="questionImage" width="150px">
+          <p id="question"></p>
+          <form>
+             <label onclick="choose(this)" class="label">  </label><br>  
+             <label onclick="choose(this)" class="label">  </label><br>  
+             <label onclick="choose(this)" class="label">  </label><br>  
+             <label onclick="choose(this)" class="label">  </label><br>  
+          </form>  
+          <div class="buttons">
+              <button class="controls" onclick="previous()" type="button">Previous</button>
+              <button class="controls" onclick="next()" type="button"> Next </button>
+          </div>
+          <button class="submit" onclick="submitExam()">Submit</button>
+       </div>
+       <div class="submitpage" id="submitpage">You scored:<span class="mark"></span><br><span>Equivalent to:<br><span id="percentage"></span></span>
+       <table>
+           <th>Statistics</th>
+           <th>Values</th>
+           <tr>
+               <td>Total Questions</td>
+               <td id="totalquestions"></td>
+           </tr>
+           <tr>
+               <td>Attempted</td>
+               <td id="attempted"></td>
+           </tr>
+           <tr>
+               <td>Missed </td>
+               <td id="missed"></td>
+           </tr>
+           <tr>
+               <td>Skipped</td>
+               <td id="skipped"></td>
+           </tr>
+       </table>
+       <button id="review" onclick="reviewQuestion()"> Review missed questions</button>
+       </div>
+       <div class="review">
+           <h3> Question </h3>
+           <img src="" alt="question image" id="reviewQuestionImage" width="150px">
+          <p id="question1"></p>
+          <form>
+             <label class="label1">  </label><br>  
+             <label class="label1">  </label><br>  
+             <label class="label1">  </label><br>  
+             <label class="label1">  </label><br>  
+          </form>
+          <div class="reviewcontrols">
+              <button id="reviewPrevious" onclick="reviewPrevious()">previous</button>
+              <button id="reviewNext" onclick="reviewNext()">next</button>
+              
+          </div>
+          <h3 class="explain">Explanation</h3>  
+          <p class="explanation"></p>
+       </div>
+       <footer id="credits"><small>Disclaimer: All questions were sourced from the Solid Solutions post-utme past questions</small></footer>
+    </body>
+    <script>
+    // random bullshit go
+    // ============================================
+// 1. DATA STORAGE & QUESTION BANKS
+// ============================================
+/*
+ * Contains all question data for different subjects.
+ * Each question object follows the structure:
+ *   question: string - The question text
+ *   options: string[] - Array of 4 answer options
+ *   answer: string - The correct answer text
+ *   image: string (optional) - URL to question image
+ *   explanation: string (optional) - Detailed explanation
+ */
+        const mathQuestions = [
+        {
+    question: "The table shows the outcome when a die is thrown a number of times. If the probability of obtaining a 3 is 0.225, how many times was the die thrown?",
+    options: ["172", "45", "200", "156"],
+    answer: "200",
+    image:"https://i.ibb.co/mmYkPWn/IMG-20260719-080702-662.webp",
+    explanation: `The probability of an event is given by:
+Probability = Number of times the event occurred ÷ Total number of trials
+Given: Probability of obtaining 3 = 0.225 Number of times 3 occurred = 45
+Let the total number of throws be n.
+Therefore: 0.225 = 45 ÷ n
+Rearranging: n = 45 ÷ 0.225 n = 200
+Hence, the die was thrown 200 times.`
+},
+{
+    question: "The 3rd and 6th terms of a Geometric Progression are 48 and 14²/₉ respectively. What is the first term?",
+    options: ["2⅔", "48", "32", "108"],
+    answer: "108",
+    explanation: `In a Geometric Progression (GP), the nth term is given by Tₙ = arⁿ⁻¹, where a is the first term and r is the common ratio.
+
+Given:
+T₃ = 48
+T₆ = 14²/₉ = 128/9
+
+Therefore:
+T₃ = ar² = 48
+T₆ = ar⁵ = 128/9
+
+Dividing T₆ by T₃:
+(ar⁵)/(ar²) = (128/9)/48
+
+r³ = 128/432 = 8/27
+
+Taking the cube root:
+r = 2/3
+
+Now use T₃ = ar²:
+48 = a(2/3)²
+48 = a(4/9)
+
+Therefore:
+a = 48 × 9/4
+a = 108
+
+Hence, the first term of the GP is 108.`
+},
+{
+    question: "1/2, 1/x, 1/3 are successive terms of an arithmetic progression. Find the value of (2-x)/(x-3).",
+    options: ["1", "2/5", "2/3", "7/9"],
+    answer: "2/3",
+    explanation: `Since 1/2, 1/x, and 1/3 are successive terms of an arithmetic progression, their common differences are equal.
+
+Therefore:
+
+1/x - 1/2 = 1/3 - 1/x
+
+Simplifying:
+
+(2 - x)/(2x) = (x - 3)/(3x)
+
+Cross-multiplying:
+
+3(2 - x) = 2(x - 3)
+
+6 - 3x = 2x - 6
+
+12 = 5x
+
+Therefore:
+
+x = 12/5
+
+Now substitute x = 12/5 into the required expression:
+
+(2 - x)/(x - 3)
+
+= (2 - 12/5)/(12/5 - 3)
+
+= ((10 - 12)/5)/((12 - 15)/5)
+
+= (-2/5)/(-3/5)
+
+= 2/3
+
+Therefore, the value of (2 - x)/(x - 3) is 2/3.` 
+},
+{
+    question: "If A = {1, 3, 5, 7, 9, 11}, B = {2, 3, 5, 7, 11, 15}, C = {3, 6, 9, 12, 15} are the subsets of U = {1, 2, 3,…,15}, find A'∩(B U C)",
+    options: ["{6, 12, 15}", "{12, 15}", "{6}", "{2, 6, 12, 15}"],
+    answer: "{2, 6, 12, 15}",
+    explanation: `First, find the complement of A.
+A' = U - A = {2, 4, 6, 8, 10, 12, 13, 14, 15}
+Next, find B ∪ C:
+B ∪ C = {2, 3, 5, 6, 7, 9, 11, 12, 15}
+Now find the intersection of A' and B ∪ C:
+A' ∩ (B ∪ C) = {2, 6, 12, 15}
+Therefore, the answer is:
+{2, 6, 12, 15}`
+},
+{
+    question: "Simplify:",
+    image: "https://i.ibb.co/x8GnWNNw/IMG-20260810-182147-880.webp",
+    options: ["3", "2", "6", "8"],
+    answer: "6",
+    explanation: `First, simplify the expression inside the brackets.
+
+3⅜ + 1 + ⅝
+= 3 + ⅜ + 1 + ⅝
+= 3 + 1 + 1
+= 5
+
+Therefore, the numerator becomes:
+
+¾ × 5 = 15/4
+
+Now simplify the denominator:
+
+2⅛ - 1½
+= 17/8 - 12/8
+= 5/8
+
+So the expression becomes:
+
+(15/4) ÷ (5/8)
+
+Dividing by a fraction means multiplying by its reciprocal:
+
+= 15/4 × 8/5
+= 6
+
+Hence, the answer is 6.`
+},
+{
+    question: "The cross section of a uniform prism is a right-angled triangle with sides 3 cm, 4 cm and 5 cm. If its length is 10 cm, calculate the total surface area.",
+    options: ["100 cm²", "112 cm²", "106 cm²", "132 cm²"],
+    answer: "132 cm²",
+    explanation: `The cross-section is a right-angled triangle with perpendicular sides 3 cm and 4 cm.
+
+First, find the area of the triangular cross-section:
+
+Area = ½ × base × height
+     = ½ × 3 × 4
+     = 6 cm²
+
+Since the prism has two triangular ends:
+
+Area of the two ends = 2 × 6
+                     = 12 cm²
+
+Next, find the lateral surface area.
+
+The perimeter of the triangular cross-section is:
+
+3 + 4 + 5 = 12 cm
+
+Therefore:
+
+Lateral surface area = perimeter × length
+                     = 12 × 10
+                     = 120 cm²
+
+Hence, the total surface area is:
+
+TSA = 12 + 120
+    = 132 cm²
+
+Therefore, the total surface area of the prism is 132 cm².`
+},
+{
+    question: "Differentiate 1/√x with respect to x.",
+    options: [
+        "-1/(2√x³)",
+        "-1/(2√x)",
+        "-1/(2x³)",
+        "1/(2√x)"
+    ],
+    answer: "-1/(2√x³)",
+    explanation: `First, rewrite 1/√x using indices:
+
+1/√x = x⁻¹ᐟ²
+
+Using the power rule:
+
+d/dx(xⁿ) = nxⁿ⁻¹
+
+Therefore:
+
+d/dx(x⁻¹ᐟ²)
+= -½x⁻³ᐟ²
+
+Now rewrite x⁻³ᐟ²:
+
+-½x⁻³ᐟ² = -1/(2x³ᐟ²)
+             = -1/(2√x³)
+
+Hence, the derivative is:
+
+-1/(2√x³)` 
+},
+{
+    question: "What is the value of dy/dx when x = 4 for the function y = x ln(x − 3)?",
+    options: ["0", "4", "1", "1/2"],
+    answer: "4",
+    explanation: `Given:
+
+y = x ln(x − 3)
+
+Using the product rule:
+
+d/dx(uv) = u(dv/dx) + v(du/dx)
+
+Let:
+u = x
+v = ln(x − 3)
+
+Therefore:
+
+dy/dx = x × 1/(x − 3) + ln(x − 3) × 1
+
+So:
+
+dy/dx = x/(x − 3) + ln(x − 3)
+
+Now substitute x = 4:
+
+dy/dx = 4/(4 − 3) + ln(4 − 3)
+      = 4/1 + ln(1)
+      = 4 + 0
+      = 4
+
+Hence, the value of dy/dx when x = 4 is 4.`
+},
+{
+    question: "Evaluate ∫(1/(x+2)) dx.",
+    options: ["2", "2 ln 2", "ln 2", "ln 3"],
+    answer: "2 ln 2",
+    explanation: `Using the integration rule:
+
+∫ 1/(x + a) dx = ln|x + a| + C
+
+Therefore:
+
+∫₀⁶ 1/(x + 2) dx
+= [ln|x + 2|]₀⁶
+
+Substitute the upper and lower limits:
+
+= ln(6 + 2) − ln(0 + 2)
+= ln 8 − ln 2
+
+Using the logarithm rule:
+
+ln a − ln b = ln(a/b)
+
+Therefore:
+
+= ln(8/2)
+= ln 4
+= 2 ln 2
+
+Hence, the value of the integral is 2 ln 2.`
+},
+{
+    question: "Given the matrices shown, compute 2B − A.",
+    image: "https://i.ibb.co/XZn9Ft3M/IMG-20260810-120742-290.webp",
+    options: [
+        "[4 8; 3 1]",
+        "[3 2; 1 4]",
+        "[4 7; 8 2]",
+        "[4 7; 8 3]"
+    ],
+    answer: "[4 7; 8 3]",
+    explanation: `Given:
+
+A = [2  3]
+    [4  1]
+
+B = [3  5]
+    [6  2]
+
+First, multiply matrix B by 2:
+
+2B = [2(3)  2(5)]
+     [2(6)  2(2)]
+
+   = [6  10]
+     [12  4]
+
+Now subtract A:
+
+2B − A = [6  10] − [2  3]
+          [12  4]   [4  1]
+
+        = [6 − 2   10 − 3]
+          [12 − 4   4 − 1]
+
+        = [4  7]
+          [8  3]
+
+Hence, the answer is [4 7; 8 3].`
+}];
+
+        const aptitudeQuestions = [
+  {
+    question: "Pick out the odd one.",
+    options: ["Leopard", "Cougar", "Elephant", "Lion"],
+    answer: "Elephant",
+    explanation: `Leopard, cougar, and lion are all members of the cat family (Felidae).
+
+Elephant, however, belongs to a different family and is not a member of the cat family.
+
+Therefore, the odd one is Elephant.`
+    
+  },
+  {
+    question: "The biggest mammal on earth is?",
+    options: ["The Blue Whale", "The blue shark", "Elephant", "Lion"],
+    answer: "The Blue Whale",
+    explanation: `The blue whale is the largest mammal on Earth.
+
+It is also the largest animal known to have ever lived. Blue whales can grow to around 30 metres in length and weigh well over 100 tonnes.
+
+The elephant is the largest land mammal, but it is much smaller than the blue whale.
+
+Therefore, the correct answer is The Blue Whale.`
+  },
+  {
+    question: "The killing of a mother is known as?",
+    options: ["Matricide", "Patricide", "Suicide", "Homicide"],
+    answer: "Matricide",
+    explanation: `Matricide is the killing of one's mother.
+
+Patricide refers to the killing of one's father, while homicide refers generally to the killing of another person.
+
+Therefore, the correct answer is Matricide.`
+  },
+  {
+    question: "Who is the current royal head of England?",
+    options: ["Prince Charles", "Queen Elizabeth II", "King Charles III", "Prince Charles II"],
+    answer: "King Charles III",
+    explanation: `King Charles III is the current monarch of the United Kingdom.
+
+He became King on 8 September 2022 following the death of his mother, Queen Elizabeth II.
+
+Therefore, the correct answer is King Charles III.`
+  },
+  {
+    question: "Who invented the Automated Teller Machine (ATM)?",
+    options: ["AI-8 Alexandra Bill", "John Adrian Shepherd-Barron", "George Bell", "Campbell Moore"],
+    answer: "John Adrian Shepherd-Barron",
+    explanation: `John Adrian Shepherd-Barron is widely credited with inventing the first cash-dispensing ATM.
+
+He developed the machine in the 1960s, and the first ATM was installed at a Barclays bank branch in London in 1967.
+
+Therefore, the correct answer is John Adrian Shepherd-Barron.`
+  },
+  {
+    question: "The Central Bank of Nigeria commenced operation in what year?",
+    options: ["1930", "1947", "1959", "1928"],
+    answer: "1959",
+    explanation: `The Central Bank of Nigeria (CBN) commenced operations on 1 July 1959.
+
+It was established under the Central Bank of Nigeria Act of 1958 to serve as Nigeria's central monetary authority.
+
+Therefore, the correct answer is 1959.`
+  },
+  {
+    question: "The longest bridge in West Africa is?",
+    options: [
+      "Danyang-Kunshan Grand Bridge",
+      "Third Mainland Bridge",
+      "6th October Bridge",
+      "Grand MASUT Bridge"
+    ],
+    answer: "Third Mainland Bridge",
+    explanation: `The Third Mainland Bridge is a major bridge in Lagos, Nigeria.
+
+It crosses the Lagos Lagoon and connects Lagos Island with the mainland. For many years, it was regarded as the longest bridge in West Africa, with a length of about 11.8 km.
+
+Why the other options are incorrect:
+
+• Danyang-Kunshan Grand Bridge is in China. It is one of the longest bridges in the world, but it is not in West Africa.
+
+• 6th October Bridge is in Cairo, Egypt. Egypt is in North Africa, not West Africa.
+
+• Grand MASUT Bridge is not the longest bridge in West Africa.
+
+Therefore, the correct answer is Third Mainland Bridge.`
+  },
+  {
+    question: "Spanish flu occurred in what year?",
+    options: ["1939", "1915", "1924", "1918"],
+    answer: "1918",
+    explanation: `The Spanish flu was a major influenza pandemic that began in 1918 and spread around the world.
+
+Why the other options are incorrect:
+
+• 1939 was the beginning of World War II, not the beginning of the Spanish flu pandemic.
+
+• 1915 was during World War I, but it was not the year the Spanish flu pandemic began.
+
+• 1924 was after the main Spanish flu pandemic had ended.
+
+• 1918 is correct because the Spanish flu pandemic began in 1918.
+
+Therefore, the correct answer is 1918.`
+  },
+  {
+    question: "The last eclipse of the sun in Nigeria was observed when?",
+    options: [
+      "March 1st 2006",
+      "March 29 2006",
+      "February 1st 2005",
+      "February 29 2006"
+    ],
+    answer: "March 29 2006",
+    explanation: `A total solar eclipse was observed in parts of Nigeria on March 29, 2006.
+
+Why the other options are incorrect:
+
+• March 1st 2006 was not the date of the solar eclipse observed in Nigeria.
+
+• March 29 2006 is correct. A total solar eclipse crossed parts of Nigeria on this date.
+
+• February 1st 2005 was not the date of the solar eclipse.
+
+• February 29 2006 is not a valid date because 2006 was not a leap year.
+
+Therefore, the correct answer is March 29 2006.`
+  },
+  {
+    question: "The first country to adopt Gold Standard was?",
+    options: ["Egypt", "USA", "England", "Russia"],
+    answer: "England",
+    explanation: `England was the first country to officially adopt the Gold Standard.
+
+Britain adopted gold as the basis of its monetary system in the early 19th century, helping establish the gold standard that was later adopted by other countries.
+
+Why the other options are incorrect:
+
+• Egypt did not establish the first gold standard.
+
+• The USA adopted the gold standard later, in the 19th century.
+
+• England is correct because Britain was the first country to formally adopt the gold standard.
+
+• Russia adopted the gold standard later, in the late 19th century.
+
+Therefore, the correct answer is England.`
+  },
+  {
+    question: "Choose the word that is a necessary part of ovation.",
+    options: ["Outburst", "Bravo", "Applause", "Encore"],
+    answer: "Applause",
+    explanation: `An ovation is a strong expression of approval or admiration, usually shown by an audience through applause.
+
+Why the other options are incorrect:
+
+• Outburst is a sudden expression of strong emotion, but it is not necessarily part of an ovation.
+
+• Bravo is an expression of approval or praise, but an ovation does not require someone to say "bravo."
+
+• Applause is the clapping of hands to show approval or appreciation and is a necessary part of an ovation.
+
+• Encore is a request for a performer to perform again. It may happen after an ovation but is not part of the ovation itself.
+
+Therefore, the correct answer is Applause.`
+},
+{
+    question: "Complete the sequence 1, 4, 8, 9, 27, 16, ?",
+    options: ["25", "56", "64", "18"],
+    answer: "64",
+    explanation: `The sequence follows an alternating pattern of squares and cubes.
+
+1 = 1³
+4 = 2²
+8 = 2³
+9 = 3²
+27 = 3³
+16 = 4²
+
+Following the pattern, the next term is:
+
+4³ = 64
+
+Therefore, the correct answer is 64.`
+},
+{
+    question: "Choose the word with the correct spelling.",
+    options: ["Definitelly", "definately", "definitilly", "definitely"],
+    answer: "definitely",
+    explanation: `The word "definitely" is spelled with "finite" in the middle:
+
+definitely = definite + ly
+
+Why the other options are incorrect:
+
+• "Definitelly" is incorrect because it has an extra "l".
+
+• "Definately" is incorrect because it is missing the second "i".
+
+• "Definitilly" is incorrect because the ending is spelled "ely", not "illy".
+
+• "Definitely" is the correct spelling.
+
+Therefore, the correct answer is definitely.`
+},
+{
+    question: "Choose the option that is nearest in meaning to the word italicized: I suppose the old woman is vulnerable to cold.",
+    options: ["susceptible", "impervious", "immune", "injured"],
+    answer: "susceptible",
+    explanation: `The word "vulnerable" means easily affected, harmed, or influenced by something.
+
+In this sentence, "vulnerable to cold" means that the old woman is easily affected by cold.
+
+Why the other options are incorrect:
+
+• "Susceptible" means easily affected or harmed by something. It is the closest in meaning to "vulnerable".
+
+• "Impervious" means not affected or influenced by something. It has the opposite meaning.
+
+• "Immune" means protected against or unaffected by something. It also has an opposite meaning.
+
+• "Injured" means physically harmed, but it does not mean easily affected by something.
+
+Therefore, the correct answer is susceptible.`
+},
+{
+    question: "FAG : GAF :: HAI : IAH?",
+    options: ["JAK", "HAL", "HAK", "JAL"],
+    answer: "JAK",
+    explanation: `The pattern consists of pairs of a word and its reverse.
+
+FAG → GAF
+HAI → IAH
+JAK → KAJ
+
+The first letters of the original words increase by 2:
+
+F → H → J
+
+The middle letter remains A, while the last letters are:
+
+G → I → K
+
+Therefore, the missing word is JAK.`
+},
+{
+    question: "Bank : River :: Coast : ?",
+    options: ["Waves", "Sea", "Beach", "Flood"],
+    answer: "Sea",
+    explanation:`A bank is the land alongside or bordering a river.
+
+Similarly, a coast is the land that borders or lies alongside the sea.
+
+Therefore:
+
+Bank → River
+Coast → Sea
+
+Why the other options are incorrect:
+
+• Waves are movements on the surface of water, not the body of water that a coast borders.
+
+• Sea is correct because a coast borders the sea.
+
+• Beach is a shore covered with sand or other material; it is not the body of water associated with a coast.
+
+• Flood is an overflow of water onto normally dry land and is not the body of water that a coast borders.
+
+Therefore, the correct answer is Sea.`
+},
+{
+    question: "What is the meaning of the words 'esprit de corps' as used in the force?",
+    options: ["Together we stand", "Spirit of solidarity", "Corporate spirit", "Strength and unity"],
+    answer: "Spirit of solidarity",
+    explanation:`The French expression "esprit de corps" refers to a feeling of unity, loyalty, and shared purpose among members of a group, especially within an organization or force.
+
+Why the other options are incorrect:
+
+• "Together we stand" expresses unity, but it is not the direct meaning of the expression.
+
+• "Spirit of solidarity" is correct because esprit de corps describes the sense of fellowship and mutual support among members of a group.
+
+• "Corporate spirit" can refer to the attitude or culture of an organization, but it does not capture the specific meaning of solidarity as precisely.
+
+• "Strength and unity" describes a related idea, but it is not the closest definition.
+
+Therefore, the correct answer is Spirit of solidarity.`
+},
+{
+    question: "The Liberation Stadium in Nigeria can be found where?",
+    options: ["Port Harcourt", "Benin", "Osun", "Lagos"],
+    answer: "Port Harcourt",
+    explanation:`The Liberation Stadium is a major sports stadium located in Port Harcourt, Rivers State, Nigeria.
+
+It is one of the notable sports facilities in the city and has hosted football matches and other sporting events.
+
+Why the other options are incorrect:
+
+• Benin is a city in Edo State, but the Liberation Stadium is not located there.
+
+• Osun is a state in southwestern Nigeria and does not contain the Liberation Stadium.
+
+• Lagos has several major stadiums, including the National Stadium, but the Liberation Stadium is not located there.
+
+Therefore, the correct answer is Port Harcourt.`
+},
+{
+    question: "The first female senator in Nigeria was?",
+    options: ["Franca Afegbua", "Patricia Etteh", "Olubunmi Fumilayo", "Bola Sholti"],
+    answer: "Franca Afegbua",
+    explanation: `Franca Afegbua was Nigeria's first female senator. She was elected in 1983 to represent Bendel State in the Senate.
+
+Why the other options are incorrect:
+
+• Patricia Etteh was a female politician who later became the first female Speaker of the Nigerian House of Representatives, but she was not the first female senator.
+
+• Olubunmi Fumilayo was not Nigeria's first female senator.
+
+• Bola Sholti was not Nigeria's first female senator.
+
+Therefore, the correct answer is Franca Afegbua.`
+},
+{
+    question: "Nelson Mandela was awarded the Nobel Peace Prize in?",
+    options: ["1994", "1995", "1996", "1993"],
+    answer: "1993",
+    explanation: `Nelson Mandela was awarded the Nobel Peace Prize in 1993, jointly with F. W. de Klerk, for their work toward peacefully ending apartheid and establishing the foundations for a democratic South Africa.
+
+Why the other options are incorrect:
+
+• 1994 was the year Mandela became President of South Africa following the country's first fully inclusive democratic election.
+
+• 1995 was the year South Africa hosted and won the Rugby World Cup, an event associated with Mandela's presidency.
+
+• 1996 was after Mandela had already received the Nobel Peace Prize.
+
+• 1993 is correct because Mandela and F. W. de Klerk jointly received the Nobel Peace Prize that year.
+
+Therefore, the correct answer is 1993.`
+},
+{
+    question: "The only uncolonized country in Africa is",
+    options: ["Egypt", "Uganda", "Ethiopia", "Ghana"],
+    answer: "Ethiopia",
+    year: 2022,
+    explanation: `Ethiopia is commonly regarded as the only African country that was not formally colonized by a European power during the Scramble for Africa.
+
+Although Italy occupied Ethiopia from 1936 to 1941, this occupation was relatively brief and is generally distinguished from the long-term colonial rule experienced by most other African countries.
+
+Why the other options are incorrect:
+
+• Egypt was under British occupation from 1882 and later became a British protectorate.
+
+• Uganda became a British protectorate in 1894.
+
+• Ghana, then known as the Gold Coast, was a British colony.
+
+• Ethiopia is the correct answer because it successfully resisted European colonial rule for most of the colonial period and maintained its sovereignty, except for the period of Italian occupation.
+
+Therefore, the correct answer is Ethiopia.`
+},
+  {
+    question: "What day follows the day before yesterday if two days from now will be Sunday?",
+    options: ["Sunday", "Friday", "Wednesday", "Thursday"],
+    answer: "Thursday",
+    year: 2022,
+    explanation: `If two days from now will be Sunday, then today must be Friday.
+
+Therefore:
+
+Today = Friday
+Tomorrow = Saturday
+Two days from now = Sunday
+
+Working backwards:
+
+Yesterday = Thursday
+Day before yesterday = Wednesday
+
+The day that follows Wednesday is Thursday.
+
+Therefore, the correct answer is Thursday.`
+  },
+  {
+    question: "Ten athletes are competing in a 100m race. If one athlete overtakes the runner in second place, in what position is the athlete now?",
+    options: [
+      "Impossible to determine",
+      "First",
+      "Second",
+      "Fourth"
+    ],
+    answer: "Second",
+    year: 2022,
+    explanation: `If an athlete overtakes the runner who is currently in second place, the athlete takes that runner's position.
+
+The athlete was behind the runner in second place, so overtaking that runner moves the athlete into second place.
+
+The athlete does not become first because the runner in first place has not been overtaken.
+
+Therefore, the correct answer is Second.`
+},
+  {
+    question: "THIMBLE : FINGER ::",
+    options: [
+      "Sword : Warrior",
+      "Helmet : Head",
+      "Shoe : Sock",
+      "Watch : Wrist"
+    ],
+    answer: "Helmet : Head",
+    year: 2022,
+    explanation: `A thimble is worn on a finger to protect it while sewing.
+
+Similarly, a helmet is worn on the head to protect it.
+
+Why the other options are incorrect:
+
+• Sword : Warrior — a sword is used by a warrior, but it is not worn on or specifically used to protect a body part.
+
+• Helmet : Head — a helmet is worn on the head for protection, which matches the relationship between a thimble and a finger.
+
+• Shoe : Sock — a shoe is worn on the foot, not on a sock. A sock is worn inside a shoe.
+
+• Watch : Wrist — a watch is worn on the wrist, but its primary purpose is to tell time rather than protect the wrist.
+
+Therefore, the correct answer is Helmet : Head.`
+  },
+  {
+    question: "The first G.S.M. network provider to start operation in Nigeria was",
+    options: [
+      "MTN",
+      "Econet",
+      "Glo",
+      "Airtel"
+    ],
+    answer: "Econet",
+    year: 2022,
+    explanation: `Econet Wireless was one of the first GSM operators to begin commercial GSM operations in Nigeria in 2001.
+
+Why the other options are incorrect:
+
+• MTN began GSM operations in Nigeria in 2001, but Econet was the first to commence commercial GSM service.
+
+• Glo entered the Nigerian GSM market later, in 2003.
+
+• Airtel entered the Nigerian market later under different names, including Econet and Zain.
+
+Therefore, the correct answer is Econet.`
+},
+
+{
+    question: "Which of the following towns does not have a seaport?",
+    options: [
+      "Benin",
+      "Calabar",
+      "Lagos",
+      "Port Harcourt"
+    ],
+    answer: "Benin",
+    year: 2022,
+    explanation: `Benin does not have a seaport.
+
+Why the other options are incorrect:
+
+• Calabar has the Calabar Port in Cross River State.
+
+• Lagos has major seaports, including Apapa and Tin Can Island ports.
+
+• Port Harcourt has seaport facilities serving the city and surrounding areas.
+
+• Benin is inland and does not have a seaport.
+
+Therefore, the correct answer is Benin.`
+},
+
+{
+    question: "How many stanzas are in the Nigerian National Anthem?",
+    options: [
+      "One",
+      "Two",
+      "Three",
+      "Four"
+    ],
+    answer: "Three",
+    year: 2022,
+    explanation: `The Nigerian National Anthem, "Arise, O Compatriots," consists of three stanzas.
+
+Why the other options are incorrect:
+
+• One is incorrect because the anthem has more than one stanza.
+
+• Two is incorrect because there are three stanzas.
+
+• Three is correct.
+
+• Four is incorrect because the anthem does not contain four stanzas.
+
+Therefore, the correct answer is Three.`
+},
+
+{
+    question: `If nobody loves nobody, which of the following must be true?
+
+I. Everybody loves somebody.
+II. Somebody loves somebody.
+III. Nobody loves anybody.`,
+    options: [
+      "I only",
+      "II only",
+      "III only",
+      "I and II only"
+    ],
+    answer: "III only",
+    year: 2022,
+    explanation: `The statement "nobody loves nobody" means that no person loves any other person.
+
+Therefore:
+
+I. Everybody loves somebody — False. This contradicts the given statement.
+
+II. Somebody loves somebody — False. This also contradicts the given statement.
+
+III. Nobody loves anybody — True. This is the meaning of the given statement.
+
+Therefore, only statement III must be true.
+
+Hence, the correct answer is III only.`
+},
+
+{
+    question: "Fill the blanks: In spite of the ____ of her presentation, many people were ____ with the speaker's concepts and ideas.",
+    options: [
+      "interest, enthralled",
+      "power, take",
+      "intensity, shocked",
+      "strength, bored"
+    ],
+    answer: "interest, enthralled",
+    year: 2022,
+    explanation: `The sentence requires words that make grammatical and logical sense.
+
+"In spite of the interest of her presentation, many people were enthralled with the speaker's concepts and ideas."
+
+"Interest" relates to something that attracts attention, while "enthralled" means extremely interested or fascinated.
+
+Why the other options are incorrect:
+
+• "Power, take" is grammatically incorrect in the sentence.
+
+• "Intensity, shocked" does not fit the intended meaning as naturally as the correct option.
+
+• "Strength, bored" gives a meaning that contradicts the idea of people being interested in the concepts.
+
+Therefore, the correct answer is interest, enthralled.`
+},
+
+{
+    question: "What are the next numbers in the following sequence? 0, 0, 1, 2, 2, 4, 3, 6, 4, 8, 5, ? ?",
+    options: [
+      "6, 10",
+      "8, 10",
+      "10, 6",
+      "12, 6"
+    ],
+    answer: "10, 6",
+    year: 2022,
+    explanation: `The sequence consists of two interwoven sequences.
+
+The odd-position terms are:
+
+0, 1, 2, 3, 4, 5, 6
+
+The even-position terms are:
+
+0, 2, 4, 6, 8, 10
+
+Therefore, after 5, the next two terms are:
+
+10, 6
+
+Hence, the correct answer is 10, 6.`
+},
+
+{
+    question: "The main stay of the Nigeria economy before the arrival of petroleum was ____.",
+    options: [
+      "Agriculture",
+      "Mining",
+      "Crafting",
+      "Trade and commerce"
+    ],
+    answer: "Agriculture",
+    explanation: `Before petroleum became the dominant source of government revenue and foreign exchange, agriculture was the mainstay of Nigeria's economy.
+
+Nigeria produced major agricultural commodities such as cocoa, groundnuts, palm products, cotton and rubber.
+
+Why the other options are incorrect:
+
+• Mining was important but was not the mainstay of the economy.
+
+• Crafting was an economic activity but was not the country's principal economic sector.
+
+• Trade and commerce were important, but agriculture was the dominant sector.
+
+Therefore, the correct answer is Agriculture.`
+},
+
+{
+    question: "Which of the following planets is closest to the sun?",
+    options: [
+      "Pluto",
+      "Neptune",
+      "Uranus",
+      "Mercury"
+    ],
+    answer: "Mercury",
+    explanation: `Mercury is the planet closest to the Sun.
+
+Why the other options are incorrect:
+
+• Pluto is a dwarf planet and is much farther from the Sun.
+
+• Neptune is the eighth planet from the Sun.
+
+• Uranus is the seventh planet from the Sun.
+
+• Mercury is the first planet from the Sun.
+
+Therefore, the correct answer is Mercury.`
+},
+
+{
+    question: "The headmaster warned the teacher to refrain from giving ____ to the boys.",
+    options: [
+      "Many bad advices",
+      "Bad advice",
+      "Some bad advices",
+      "Bad advices"
+    ],
+    answer: "Bad advice",
+    explanation: `The correct answer is "bad advice" because "advice" is an uncountable noun in English and does not normally take the plural form "advices."
+
+Why the other options are incorrect:
+
+• "Many bad advices" is incorrect because "advice" is uncountable.
+
+• "Bad advice" is correct.
+
+• "Some bad advices" is incorrect because "advice" does not take a plural "s."
+
+• "Bad advices" is also incorrect for the same reason.
+
+Therefore, the correct answer is Bad advice.`
+},
+
+{
+    question: "Rearranging the letters MEANYRG would give you the name of ____.",
+    options: [
+      "An ocean",
+      "A state",
+      "A country",
+      "A city"
+    ],
+    answer: "A country",
+    explanation: `The letters MEANYRG can be rearranged to form GERMANY.
+
+Germany is the name of a country in Europe.
+
+Why the other options are incorrect:
+
+• It is not the name of an ocean.
+
+• It is not the name of a state.
+
+• It is not the name of a city.
+
+Therefore, the correct answer is A country.`
+},
+
+{
+    question: "If every staff is working at the same rate in a restaurant and eight servers can serve 50 customers in 60 minutes, four servers can serve 100 of them in how many minutes?",
+    options: [
+      "30 minutes",
+      "600 minutes",
+      "120 minutes",
+      "240 minutes"
+    ],
+    answer: "240 minutes",
+    explanation: `Eight servers can serve 50 customers in 60 minutes.
+
+Since four servers are half as many as eight, they will take twice as long to serve the same 50 customers:
+
+60 × 2 = 120 minutes
+
+But the number of customers is also doubled from 50 to 100, so the time doubles again:
+
+120 × 2 = 240 minutes
+
+Therefore, four servers will take 240 minutes to serve 100 customers.
+
+The correct answer is 240 minutes.`
+},
+
+{
+    question: "A clothing store offers successive discounts of 30 percent and 10 percent on a cloth. The equivalent single discount would be ____.",
+    options: [
+      "40%",
+      "38%",
+      "34%",
+      "37%"
+    ],
+    answer: "37%",
+    explanation: `Assume the original price of the cloth is ₦100.
+
+After a 30% discount:
+
+₦100 − ₦30 = ₦70
+
+A further 10% discount is taken from ₦70:
+
+10% of ₦70 = ₦7
+
+So the final price is:
+
+₦70 − ₦7 = ₦63
+
+The total discount is:
+
+₦100 − ₦63 = ₦37
+
+Therefore, the equivalent single discount is 37%.
+
+The correct answer is 37%.`
+},
+
+{
+    question: "If there are twenty guests at a ceremony, and each guest shakes hands with another, how many handshakes are there?",
+    options: [
+      "190",
+      "200",
+      "210",
+      "380"
+    ],
+    answer: "190",
+    explanation: `Each handshake occurs between a pair of guests, and no pair needs to shake hands more than once.
+
+The number of handshakes is:
+
+20 × 19 / 2 = 190
+
+We divide by 2 because each handshake would otherwise be counted twice.
+
+Therefore, the correct answer is 190.`
+},
+
+{
+    question: "Take ₦1000. Add ₦40. Add another ₦1000. Add ₦30. Add ₦1000 again. Add ₦20. Add ₦1000. And add ₦10. What is the total?",
+    options: [
+      "₦2100",
+      "₦3100",
+      "₦4100",
+      "₦5100"
+    ],
+    answer: "₦4100",
+    explanation: `Add the four amounts of ₦1000:
+
+₦1000 + ₦1000 + ₦1000 + ₦1000 = ₦4000
+
+Then add the remaining amounts:
+
+₦40 + ₦30 + ₦20 + ₦10 = ₦100
+
+Therefore:
+
+₦4000 + ₦100 = ₦4100
+
+Hence, the correct answer is ₦4100.`
+},
+
+{
+    question: "A survey of 50 people who can write showed that 20 could write only with their left hand and 10 could write with either hand. How many could write with their right hand?",
+    options: [
+      "30",
+      "10",
+      "20",
+      "25"
+    ],
+    answer: "30",
+    explanation: `There are 50 people in total.
+
+20 people can write only with their left hand, while 10 can write with either hand.
+
+The people who can write with their right hand are:
+
+50 − 20 = 30
+
+This includes the 10 people who can write with either hand.
+
+Therefore, 30 people could write with their right hand.`
+},
+
+{
+    question: "Peter is taller than Mary and Daniel is shorter than Peter. Which of the following statement is true?",
+    options: [
+      "Daniel is taller than Mary",
+      "Daniel is shorter than Mary",
+      "Daniel is as tall as Mary",
+      "None of the above"
+    ],
+    answer: "None of the above",
+    explanation: `We know that Peter is taller than Mary and Daniel is shorter than Peter.
+
+However, we do not know how Daniel's height compares with Mary's height.
+
+Daniel could be taller than Mary, shorter than Mary, or the same height as Mary.
+
+Therefore, none of the first three statements must be true.
+
+Hence, the correct answer is None of the above.`
+},
+];
+
+        const chemistryQuestions = [
+{
+    question: "The chemical symbol for Sodium is:",
+    options: ["So", "Na", "S", "Sn"],
+    answer: "Na",
+    explanation: `The chemical symbol for sodium is Na. It comes from the Latin name for sodium, "natrium".
+
+Why the other options are incorrect:
+
+• So is not the chemical symbol for any element.
+• Na is correct because it represents sodium.
+• S is the symbol for sulfur.
+• Sn is the symbol for tin.
+
+Therefore, the correct answer is Na.`
+},
+
+{
+    question: "Water is made up of:",
+    options: ["H₂O", "CO₂", "O₂", "NaCl"],
+    answer: "H₂O",
+    explanation: `Water is made up of two hydrogen atoms and one oxygen atom, giving it the chemical formula H₂O.
+
+Why the other options are incorrect:
+
+• H₂O is correct because it represents two hydrogen atoms combined with one oxygen atom.
+• CO₂ is carbon dioxide.
+• O₂ is oxygen gas.
+• NaCl is sodium chloride, commonly known as table salt.
+
+Therefore, the correct answer is H₂O.`
+},
+
+{
+    question: "The pH of a neutral solution is:",
+    options: ["1", "5", "7", "14"],
+    answer: "7",
+    explanation: `At 25°C, a neutral solution has a pH of 7.
+
+Why the other options are incorrect:
+
+• A pH of 1 indicates a strongly acidic solution.
+• A pH of 5 indicates an acidic solution.
+• A pH of 7 represents a neutral solution.
+• A pH of 14 indicates a strongly alkaline solution.
+
+Therefore, the correct answer is 7.`
+},
+
+{
+    question: "The entropy will usually increase when: I. a molecule is broken into two or more smaller molecules II. a reaction occurs that results in an increase in the number of moles of a gas III. a solid changes to liquid IV. a liquid changes to gas",
+    options: [
+        "I only",
+        "II, III & IV",
+        "I & II",
+        "I, II, III & IV"
+    ],
+    answer: "I, II, III & IV",
+    explanation: `Entropy is a measure of the degree of disorder or randomness in a system. Entropy generally increases when particles have more freedom of movement or when the number of possible arrangements increases.
+
+I. A molecule breaking into smaller molecules usually increases the number of particles and possible arrangements, so entropy increases.
+
+II. An increase in the number of moles of gas means more gas particles and greater disorder, so entropy increases.
+
+III. When a solid changes to a liquid, particles become less ordered and have greater freedom of movement, so entropy increases.
+
+IV. When a liquid changes to a gas, particles become much more widely dispersed and have greater freedom of movement, so entropy increases.
+
+Therefore, all four statements are correct.
+
+The correct answer is I, II, III & IV.`
+},
+
+{
+    question: "Ethanol can be oxidized stepwise. What is the first stable intermediate product when ethanol is oxidized with a mild oxidizing agent?",
+    options: [
+        "CH₃CH₂OH",
+        "CH₃COOH",
+        "CH₃CHO",
+        "CO₂"
+    ],
+    answer: "CH₃CHO",
+    explanation: `Ethanol is a primary alcohol. When it is oxidized under controlled conditions with a mild oxidizing agent, it first forms ethanal.
+
+Ethanol → Ethanal → Ethanoic acid
+
+Why the other options are incorrect:
+
+• CH₃CH₂OH is ethanol itself, the starting material.
+• CH₃COOH is ethanoic acid, which is formed after further oxidation.
+• CH₃CHO is ethanal and is the first stable oxidation product.
+• CO₂ is not the first product of ethanol oxidation.
+
+Therefore, the correct answer is CH₃CHO.`
+},
+
+{
+    question: "Which of the following alcohols forms a ketone when oxidized?",
+    options: [
+        "Propan-1-ol",
+        "Propan-2-ol",
+        "Methanol",
+        "Butan-1-ol"
+    ],
+    answer: "Propan-2-ol",
+    explanation: `Secondary alcohols are oxidized to ketones. Propan-2-ol is a secondary alcohol, so its oxidation produces propanone.
+
+Why the other options are incorrect:
+
+• Propan-1-ol is a primary alcohol and is oxidized to an aldehyde and eventually a carboxylic acid.
+• Propan-2-ol is a secondary alcohol and forms propanone, a ketone.
+• Methanol is a primary alcohol and forms methanal on oxidation.
+• Butan-1-ol is a primary alcohol and forms an aldehyde on controlled oxidation.
+
+Therefore, the correct answer is Propan-2-ol.`
+},
+
+{
+    question: "What is the shape of the graph of pressure against volume at constant temperature?",
+    options: [
+        "Parabola",
+        "Hyperbola",
+        "A straight line",
+        "Circular"
+    ],
+    answer: "Hyperbola",
+    explanation: `At constant temperature, Boyle's law states that pressure is inversely proportional to volume:
+
+P ∝ 1/V
+
+Therefore:
+
+PV = constant
+
+As volume increases, pressure decreases in such a way that a graph of pressure against volume forms a rectangular hyperbola.
+
+Why the other options are incorrect:
+
+• A parabola does not represent the inverse relationship between pressure and volume.
+• A hyperbola is correct because pressure is inversely proportional to volume.
+• A straight line would represent a direct linear relationship, not an inverse relationship.
+• A circle does not represent the pressure-volume relationship described by Boyle's law.
+
+Therefore, the correct answer is Hyperbola.`
+},
+
+{
+    question: "Which of the following has the highest ionization energy?",
+    options: [
+        "O",
+        "N",
+        "Be",
+        "B"
+    ],
+    answer: "N",
+    explanation: `Ionization energy generally increases from left to right across a period. However, nitrogen has a higher ionization energy than oxygen because nitrogen has a particularly stable half-filled 2p³ configuration.
+
+Why the other options are incorrect:
+
+• O has a lower ionization energy than N because removing an electron from oxygen's paired 2p orbital is relatively easier.
+• N is correct because its half-filled 2p³ configuration is especially stable.
+• Be has a lower ionization energy than N because it is farther to the left and has fewer occupied energy levels in its outer shell.
+• B has a lower ionization energy than Be and N.
+
+Therefore, the correct answer is N.`
+},
+
+{
+    question: "Which of the following substances has the lowest melting point?",
+    options: [
+        "SiO₂",
+        "Na₂SO₄",
+        "ZnCl₂",
+        "SO₂"
+    ],
+    answer: "SO₂",
+    explanation: `SO₂ has the lowest melting point among the substances listed because it is a small molecular substance with relatively weak intermolecular forces compared with the strong bonding in the other substances.
+
+Why the other options are incorrect:
+
+• SiO₂ has a giant covalent structure with very strong covalent bonds.
+• Na₂SO₄ is an ionic compound with strong electrostatic attractions between ions.
+• ZnCl₂ has strong ionic/covalent interactions and a higher melting point than SO₂.
+• SO₂ is a molecular compound and therefore has the lowest melting point among these options.
+
+Therefore, the correct answer is SO₂.`
+},
+
+{
+    question: "Given that the activation energy in the forward direction of an elementary step is 50 kJ and the activation energy in the reverse direction is 70 kJ, what is the energy of reaction for this step?",
+    options: [
+        "-50 kJ",
+        "50 kJ",
+        "20 kJ",
+        "-20 kJ"
+    ],
+    answer: "-20 kJ",
+    explanation: `The energy of reaction can be found from the difference between the forward and reverse activation energies.
+
+ΔE = Eₐ(forward) − Eₐ(reverse)
+
+ΔE = 50 kJ − 70 kJ
+
+ΔE = −20 kJ
+
+The negative value means that the products have lower energy than the reactants.
+
+Why the other options are incorrect:
+
+• −50 kJ is only the negative of the forward activation energy.
+• 50 kJ is the forward activation energy, not the energy change of the reaction.
+• 20 kJ has the correct magnitude but the wrong sign.
+
+Therefore, the correct answer is −20 kJ.`
+},
+
+{
+    question: "Which hybridized carbon atoms are present in 2-methylbuta-1,3-diene?",
+    options: [
+        "sp, sp² & sp²",
+        "sp² & sp³",
+        "sp & sp²",
+        "sp & sp³"
+    ],
+    answer: "sp² & sp³",
+    explanation: `2-methylbuta-1,3-diene has the structure:
+
+CH₂=C(CH₃)−CH=CH₂
+
+The carbon atoms involved in the double bonds are sp² hybridized.
+
+The carbon atom of the methyl group (CH₃) forms only single bonds, so it is sp³ hybridized.
+
+Therefore, the molecule contains sp² and sp³ hybridized carbon atoms.
+
+Why the other options are incorrect:
+
+• sp, sp² & sp² includes an sp carbon, but the molecule contains no triple bond.
+• sp² & sp³ is correct.
+• sp & sp² includes an sp carbon, which is not present.
+• sp & sp³ also incorrectly includes an sp carbon.
+
+Therefore, the correct answer is sp² & sp³.`
+},
+
+{
+    question: "The ozonolysis of a particular alkene yields butanone and ethanal as the main organic products. The alkene is:",
+    options: [
+        "Pent-1-ene",
+        "Pent-2-ene",
+        "2-methylbut-1-ene",
+        "3-methylpent-2-ene"
+    ],
+    answer: "3-methylpent-2-ene",
+    explanation: `Ozonolysis breaks the carbon-carbon double bond and converts the two alkene carbons into carbonyl compounds.
+
+3-methylpent-2-ene has the structure:
+
+CH₃−CH=C(CH₃)−CH₂−CH₃
+
+Breaking the double bond gives:
+
+CH₃CHO + CH₃COCH₂CH₃
+
+These products are ethanal and butanone.
+
+Why the other options are incorrect:
+
+• Pent-1-ene produces methanal and butanal.
+• Pent-2-ene produces ethanal and propanal.
+• 2-methylbut-1-ene produces methanal and 2-methylpropanal.
+• 3-methylpent-2-ene produces ethanal and butanone.
+
+Therefore, the correct answer is 3-methylpent-2-ene.`
+},
+
+{
+    question: "A particular hydrocarbon was erroneously named 3,3,4-trimethylpentane. What is the correct name?",
+    options: [
+        "2,2,3-trimethylpentane",
+        "2,3,3-trimethylpentane",
+        "2,3,4-trimethylpentane",
+        "3,3,2-trimethylpentane"
+    ],
+    answer: "2,3,3-trimethylpentane",
+    explanation: `According to IUPAC rules, the longest carbon chain is numbered from the end that gives the substituents the lowest possible set of locants.
+
+The numbering 3,3,4 gives the substituents the locants 3,3,4.
+
+Numbering the chain from the opposite end gives 2,3,3.
+
+Since 2,3,3 is the lower set of locants, the correct name is 2,3,3-trimethylpentane.
+
+Why the other options are incorrect:
+
+• 2,2,3-trimethylpentane represents a different arrangement of substituents.
+• 2,3,3-trimethylpentane is the correct IUPAC name.
+• 2,3,4-trimethylpentane has a different set of substituent positions.
+• 3,3,2-trimethylpentane is not written using the lowest locants in the required order.
+
+Therefore, the correct answer is 2,3,3-trimethylpentane.`
+},
+
+{
+    question: "Name the following compound:",
+    options: [
+        "6-ethyl-4-methylcyclohexene",
+        "6-ethyl-3-methylcyclohexene",
+        "3-ethyl-5-methylcyclohexene",
+        "6-ethyl-5-methylcyclohexene"
+    ],
+    image:"https://i.ibb.co/qF54TPt7/IMG-20260719-073845-597.webp",
+    answer: "6-ethyl-3-methylcyclohexene",
+    explanation: `For a cycloalkene, the carbon atoms of the double bond are assigned positions 1 and 2. The ring is then numbered in the direction that gives the substituents the lowest possible locants.
+
+Applying the numbering to the structure gives an ethyl group at carbon 6 and a methyl group at carbon 3.
+
+Therefore, the correct IUPAC name is 6-ethyl-3-methylcyclohexene.
+
+Why the other options are incorrect:
+
+• 6-ethyl-4-methylcyclohexene gives the methyl group the wrong position.
+• 6-ethyl-3-methylcyclohexene correctly gives the substituents their proper positions.
+• 3-ethyl-5-methylcyclohexene assigns the substituents to the wrong carbon atoms.
+• 6-ethyl-5-methylcyclohexene gives the methyl group the wrong position.
+
+Therefore, the correct answer is 6-ethyl-3-methylcyclohexene.`
+},
+
+{
+    question: "What is the expression for the solubility (S) of a sparingly soluble salt in terms of its solubility product constant (Ksp)?",
+    options: [
+        "S = Ksp",
+        "S = √Ksp",
+        "S = Ksp²",
+        "S = 2Ksp"
+    ],
+    answer: "S = √Ksp",
+    explanation: `For a sparingly soluble salt that dissociates in a 1:1 ratio, such as AB:
+
+AB ⇌ A⁺ + B⁻
+
+If its molar solubility is S, then:
+
+[A⁺] = S
+[B⁻] = S
+
+Therefore:
+
+Ksp = [A⁺][B⁻]
+Ksp = S × S
+Ksp = S²
+
+Taking the square root:
+
+S = √Ksp
+
+Why the other options are incorrect:
+
+• S = Ksp does not account for the squared concentration in the Ksp expression.
+• S = √Ksp is correct for a 1:1 salt.
+• S = Ksp² is mathematically inconsistent with Ksp = S².
+• S = 2Ksp is also incorrect.
+
+Therefore, the correct answer is S = √Ksp.
+
+Note: This formula applies specifically to a 1:1 salt such as AB.`
+},
+// Todo: correct these two questions after this comment
+{
+    question: "A commercial solvent, dimethyl sulfoxide (DMSO), reacts with dimethyl sulfide according to the reaction shown. If this proceeds as written, which substance could be acting as the oxidizing agent?",
+    options: [
+        "O₂",
+        "Dimethyl sulfide",
+        "Dimethyl sulfoxide",
+        "Both O₂ and dimethyl sulfoxide"
+    ],
+    answer: "O₂",
+    image: "https://i.ibb.co/cXrP96fV/IMG-20260811-130129-832.webp",
+    explanation: `An oxidizing agent is a substance that causes another substance to be oxidized while itself undergoing reduction.`
+},
+
+{
+    question: "If 5.0 g of potassium permanganate reacts completely according to the equation shown, what is the limiting reagent?",
+    options: [
+        "KMnO₄",
+        "HCl",
+        "H₂O",
+        "KCl"
+    ],
+    answer: "HCl",
+    image: "https://i.ibb.co/W4V1DNcr/IMG-20260811-131041-906.webp",
+    explanation: `The limiting reagent is the reactant that is completely consumed first and therefore limits the amount of product that can form.`
+},
+];
+        
+        const physicsQuestions = [
+  {
+    question: "An object of mass 0.5 kg is attached to a spring with spring constant 100 N/m. If stretched 0.5 m from the equilibrium position and released, what is its maximum speed?",
+    options: ["5√5 m/s", "5√2 m/s", "√5 m/s", "√2 m/s"],
+    answer: "5√5 m/s",
+    explanation: `
+At maximum speed, the spring's potential energy is converted into kinetic energy.
+
+Using:
+½kA² = ½mv²
+
+Substitute the values:
+½(100)(0.5)² = ½(0.5)v²
+
+25 = 0.25v²
+
+v² = 100
+
+v = 10 m/s
+
+Therefore, the maximum speed is 10 m/s.
+`
+  },
+  {
+    question: "What percentage of the total energy is kinetic energy in a simple harmonic motion when the displacement is one-half the amplitude?",
+    options: ["75%", "50%", "25%", "100%"],
+    answer: "75%",
+     explanation: `
+In simple harmonic motion, the total energy is:
+
+E = ½kA²
+
+The potential energy at displacement x is:
+
+PE = ½kx²
+
+Given that x = A/2:
+
+PE = ½k(A/2)²
+   = ½kA²/4
+   = E/4
+
+Therefore, the kinetic energy is:
+
+KE = E - PE
+   = E - E/4
+   = 3E/4
+
+As a percentage:
+
+KE = (3/4) × 100% = 75%
+
+Therefore, the kinetic energy is 75% of the total energy.
+`
+  },
+  {
+    question: "A balloon contains 500 m³ of helium at 27°C and 1 atm pressure. What is the volume of the helium at a pressure of 0.5 atm, where the pressure is 0.5 atm and the temperature is -3°C?",
+    options: ["1200 m³", "900 m³", "250 m³", "1000 m³"],
+    answer: "900 m³",
+    explanation: `
+Using the combined gas law:
+
+(P₁V₁)/T₁ = (P₂V₂)/T₂
+
+First, convert the temperatures to Kelvin:
+
+T₁ = 27 + 273 = 300 K
+T₂ = -3 + 273 = 270 K
+
+Rearranging for V₂:
+
+V₂ = (P₁V₁T₂)/(P₂T₁)
+
+Substitute the values:
+
+V₂ = (1 × 500 × 270)/(0.5 × 300)
+
+V₂ = 135000/150
+
+V₂ = 900 m³
+
+Therefore, the volume of the helium is 900 m³.
+`
+  },
+  {
+    question: "In the formula F = qV × B?",
+    options: [
+      "F must be perpendicular to B but not necessarily to V",
+      "F must be perpendicular to V but not necessarily to B",
+      "V must be perpendicular to B but not necessarily to F",
+      "All three vectors must be mutually perpendicular"
+    ],
+    answer: "All three vectors must be mutually perpendicular",
+    explanation: `
+The magnetic force is given by:
+
+F = q(V × B)
+
+The cross product V × B produces a vector that is perpendicular to both V and B.
+
+Therefore:
+
+F ⟂ V
+F ⟂ B
+
+Also, for the magnetic force to have its maximum value, V and B must be perpendicular:
+
+V ⟂ B
+
+Hence, all three vectors are mutually perpendicular.
+
+Therefore, the correct answer is "All three vectors must be mutually perpendicular".
+`
+  },
+  {
+    question: "Two small charged objects repel each other with a force F when separated by a distance r. If the charge on each object is reduced to one-fourth its original value and the distance between them is reduced to r/2, the force becomes?",
+    options: ["F", "F/2", "F/4", "F/8"],
+    answer: "F/4",
+    explanation: `
+Using Coulomb's law:
+
+F = kq₁q₂/r²
+
+Each charge becomes q/4 and the distance becomes r/2.
+
+Therefore:
+
+F' = k(q/4)(q/4)/(r/2)²
+
+F' = k(q²/16)/(r²/4)
+
+F' = ¼(kq²/r²)
+
+Since the original force is F = kq²/r²:
+
+F' = F/4
+
+Therefore, the new force is F/4.
+`
+  },
+  {
+    question: "Two point charges 8 × 10⁻⁹ C and -2 × 10⁻⁹ C are separated by 4 m. The electric field magnitude midway between them is? (k = 9 × 10⁹)",
+    options: ["22.5 V/m", "3.6 × 10⁻⁸ V/m", "13.5 V/m", "155,000 V/m"],
+    answer: "22.5 V/m",
+    explanation: `
+The midpoint is 2 m from each charge.
+
+Using the electric field formula:
+
+E = kq/r²
+
+For the 8 × 10⁻⁹ C charge:
+
+E₁ = (9 × 10⁹)(8 × 10⁻⁹)/(2)²
+   = 18 V/m
+
+For the -2 × 10⁻⁹ C charge:
+
+E₂ = (9 × 10⁹)(2 × 10⁻⁹)/(2)²
+   = 4.5 V/m
+
+Since the charges are opposite, the electric fields at the midpoint point in the same direction.
+
+Therefore:
+
+E = E₁ + E₂
+  = 18 + 4.5
+  = 22.5 V/m
+
+Therefore, the electric field magnitude is 22.5 V/m.
+`
+  },
+  {
+    question: "Two wires made of the same material have the same length but different diameters. They are connected to a battery. The quantity that is NOT the same for the wires is?",
+    options: [
+      "The end-to-end potential difference",
+      "The current",
+      "The current density",
+      "The electric field"
+    ],
+    answer: "The current",
+    explanation: `
+The wires have the same material and length but different diameters.
+
+Since they are connected to the same battery, the potential difference across each wire is the same.
+
+The electric field is:
+
+E = V/L
+
+Since V and L are the same, the electric field is also the same.
+
+For a given material:
+
+J = σE
+
+Since the conductivity σ and electric field E are the same, the current density J is the same.
+
+However, current is related to current density by:
+
+I = JA
+
+Because the wires have different cross-sectional areas, their currents are different.
+
+Therefore, the quantity that is NOT the same is the current.
+`
+  },
+  {
+    question: "Each plate of a capacitor stores a charge of magnitude 1 × 10⁻³ C. When a 100 V potential difference is applied, the capacitance is?",
+    options: ["50 μF", "100 μF", "10 μF", "5 μF"],
+    answer: "10 μF",
+    explanation: `
+The capacitance of a capacitor is given by:
+
+C = Q/V
+
+Substitute the given values:
+
+C = (1 × 10⁻³)/100
+
+C = 1 × 10⁻⁵ F
+
+Since 1 μF = 10⁻⁶ F:
+
+C = 10 μF
+
+Therefore, the capacitance is 10 μF.
+`
+  },
+  {
+    question: "The capacitance of a parallel-plate capacitor can be increased by:",
+    options: [
+      "Increasing the plate separation",
+      "Decreasing the plate separation",
+      "Dividing the plate area",
+      "Decreasing the plate area"
+    ],
+    answer: "Decreasing the plate separation",
+    explanation: `
+The capacitance of a parallel-plate capacitor is given by:
+
+C = εA/d
+
+where A is the plate area and d is the separation between the plates.
+
+Since capacitance is inversely proportional to the plate separation:
+
+C ∝ 1/d
+
+decreasing the separation between the plates increases the capacitance.
+
+Why the other options are wrong:
+
+- Increasing the plate separation increases d, so the capacitance decreases.
+- Dividing the plate area decreases A, so the capacitance decreases.
+- Decreasing the plate area also decreases A, so the capacitance decreases.
+
+Therefore, the correct answer is: Decreasing the plate separation.
+`
+},
+{
+    question: "A 2 Ω resistor and a 4 Ω resistor are connected in parallel to a 6 V battery. The power dissipated by the 2 Ω resistor is:",
+    options: ["8 W", "6 W", "-6 W", "18 W"],
+    answer: "18 W",
+    explanation: `
+In a parallel circuit, each resistor has the same potential difference as the battery.
+
+Therefore, the voltage across the 2 Ω resistor is:
+
+V = 6 V
+
+Power dissipated by a resistor is:
+
+P = V²/R
+
+For the 2 Ω resistor:
+
+P = 6²/2
+  = 36/2
+  = 18 W
+
+Why the other options are wrong:
+
+- 8 W is not the power obtained using P = V²/R for the 2 Ω resistor.
+- 6 W does not result from the given voltage and resistance.
+- -6 W is impossible here because a resistor dissipates positive power.
+
+Therefore, the correct answer is 18 W.
+`
+},
+  {
+    question: "A lens of focal length 15.0 cm forms an upright image four times the size of an object. Determine the distance of the image from the lens.",
+    options: ["45.0 cm", "15.0 cm", "30.0 cm", "60.0 cm"],
+    answer: "45.0 cm",
+    explanation: `
+Since the image is upright and magnified, it is a virtual image.
+
+The magnification is:
+
+m = v/u = 4
+
+Therefore:
+
+v = 4u
+
+Using the lens formula:
+
+1/f = 1/v - 1/u
+
+Substitute f = 15 cm and v = 4u:
+
+1/15 = 1/(4u) - 1/u
+
+1/15 = -3/(4u)
+
+4u = -45
+
+u = -11.25 cm
+
+Therefore:
+
+v = 4(-11.25) = -45 cm
+
+The negative sign indicates that the image is formed on the same side of the lens as the object. Therefore, the distance of the image from the lens is 45.0 cm.
+
+Why the other options are wrong:
+
+- 15.0 cm does not satisfy the lens equation with the given magnification.
+- 30.0 cm does not give a magnification of 4 with a 15 cm focal length.
+- 60.0 cm also does not satisfy the lens equation.
+
+Therefore, the correct answer is 45.0 cm.
+`
+},
+{
+    question: "How much heat is required to melt 20 g of ice at 0°C to water at the same temperature? (Specific latent heat of ice = 336 Jg⁻¹)",
+    options: [
+        "8.06 × 10³ J",
+        "7.06 × 10³ J",
+        "6.72 × 10³ J",
+        "5.38 × 10³ J"
+    ],
+    answer: "6.72 × 10³ J",
+    explanation: `
+Since the ice is already at 0°C and is being changed to water at 0°C, only latent heat is required.
+
+The heat required is:
+
+Q = mL
+
+where:
+m = 20 g
+L = 336 Jg⁻¹
+
+Therefore:
+
+Q = 20 × 336
+  = 6720 J
+
+Q = 6.72 × 10³ J
+
+Therefore, the heat required is 6.72 × 10³ J.
+
+Why the other options are wrong:
+
+- 8.06 × 10³ J results from using an incorrect value or calculation for the latent heat.
+- 7.06 × 10³ J does not result from multiplying 20 g by 336 Jg⁻¹.
+- 5.38 × 10³ J is also inconsistent with Q = mL.
+
+Therefore, the correct answer is 6.72 × 10³ J.
+`
+},
+{
+    question: "Determine the time taken to heat 2 kg of water from 20°C to 100°C in an electric kettle taking 5 A from a 210 V mains supply. (Specific heat capacity of water = 4200 Jkg⁻¹K⁻¹)",
+    options: [
+        "10.25 minutes",
+        "10.57 minutes",
+        "10.67 minutes",
+        "10.75 minutes"
+    ],
+    answer: "10.67 minutes",
+    explanation: `
+First, calculate the heat required to raise the temperature of the water.
+
+Q = mcΔT
+
+The temperature change is:
+
+ΔT = 100 - 20 = 80 K
+
+Therefore:
+
+Q = 2 × 4200 × 80
+  = 672000 J
+
+The electrical power supplied to the kettle is:
+
+P = VI
+
+P = 210 × 5
+  = 1050 W
+
+Since:
+
+P = Q/t
+
+the time taken is:
+
+t = Q/P
+  = 672000/1050
+  = 640 s
+
+Convert seconds to minutes:
+
+t = 640/60
+  = 10.67 minutes
+
+`
+},
+{
+    question: "A ray of light passes from air to water to glass to air. Given that the refractive index of light passing from air to water is 4/3 and air to glass is 3/2, calculate the refractive index of glass relative to water.",
+    options: ["0.50", "0.67", "0.75", "1.13"],
+    answer: "1.13",
+    explanation: `
+The refractive index of glass relative to water is found by dividing the refractive index of glass relative to air by the refractive index of water relative to air.
+
+n(glass/water) = n(glass/air) / n(water/air)
+
+Substitute the values:
+
+n(glass/water) = (3/2) / (4/3)
+
+n(glass/water) = (3/2) × (3/4)
+
+n(glass/water) = 9/8
+
+n(glass/water) = 1.125 ≈ 1.13
+
+
+Therefore, the refractive index of glass relative to water is 1.13.
+`
+},
+{
+    question: "In the formation of sea breeze, wind blows from",
+    options: [
+        "Sky to land",
+        "Sea to sky",
+        "Land to sea",
+        "Sea to land"
+    ],
+    answer: "Sea to land",
+    explanation: `
+During the day, the land heats up faster than the sea.
+
+The air above the land becomes warm, expands, and rises, creating a region of lower pressure over the land.
+
+The air above the cooler sea is relatively cooler and denser, creating higher pressure.
+
+Air moves from areas of higher pressure to areas of lower pressure.
+
+Therefore, air moves from the sea toward the land, producing a sea breeze.
+
+Why the other options are wrong:
+
+- Sky to land is not the direction of the horizontal pressure-driven wind.
+- Sea to sky describes rising or vertical movement of air, not the sea breeze.
+- Land to sea is the direction of a land breeze, which occurs mainly at night.
+
+Therefore, the correct answer is "Sea to land".
+`
+},
+{
+    question: "The flow of blood in the human body is based on the heat transfer process known as",
+    options: [
+        "Heat conduction",
+        "Heat convection",
+        "Heat radiation",
+        "Thermal expansion"
+    ],
+    answer: "Heat convection",
+    explanation: `Heat convection is the transfer of heat through the bulk movement of a fluid.
+
+Blood is a fluid, and as it circulates through the body, it transports heat from warmer regions to cooler regions. This makes the distribution of body heat through blood an example of convection.
+
+Why the other options are incorrect:
+
+• Heat conduction is the transfer of heat through direct contact between particles, without bulk movement of the material.
+• Heat convection is correct because circulating blood carries heat from one part of the body to another.
+• Heat radiation is the transfer of heat through electromagnetic waves and does not require a medium.
+• Thermal expansion is the increase in the size or volume of a substance when its temperature increases; it is not a heat-transfer mechanism.
+
+Therefore, the correct answer is Heat convection.`
+},
+{
+    question: "A car of mass M kg is accelerated uniformly from rest by an engine of power P. The minimum time it will take to attain a speed V is",
+    options: [
+        "MV/(2P²)",
+        "MV²/(2P)",
+        "M²V/(2P)",
+        "M/(2P)"
+    ],
+    answer: "MV²/(2P)",
+    explanation: `The engine's power is the rate at which it does work:
+
+P = Work / time
+
+The car starts from rest, so the work done by the engine becomes the car's kinetic energy.
+
+K.E. = ½MV²
+
+Therefore:
+
+P = ½MV² / t
+
+Rearranging for time:
+
+t = MV² / (2P)
+
+Hence, the minimum time required for the car to attain speed V is MV²/(2P).
+
+Why the other options are incorrect:
+
+• MV/(2P²) has incorrect dimensions and does not result from the power-energy relationship.
+• MV²/(2P) is correct because power multiplied by time gives the energy required to reach speed V.
+• M²V/(2P) contains an extra factor of M and has incorrect dimensions.
+• M/(2P) does not account for the required kinetic energy, which depends on V².
+
+Therefore, the correct answer is MV²/(2P).`
+},
+{
+    question: "A 1800 kg car stopped at a traffic light is struck from the rear by a 450 kg car. The two cars become entangled and move in the direction of the second car at 20 m/s before the collision. What is the final velocity of the combined cars?",
+    options: ["4 m/s", "16 m/s", "6 m/s", "8 m/s"],
+    answer: "4 m/s",
+    explanation: `Since the two cars become entangled after the collision, this is a perfectly inelastic collision. Therefore, momentum is conserved.
+
+The 1800 kg car is initially at rest, so its initial momentum is zero.
+
+Using conservation of momentum:
+
+m₁u₁ + m₂u₂ = (m₁ + m₂)v
+
+Where:
+m₁ = 1800 kg
+u₁ = 0 m/s
+m₂ = 450 kg
+u₂ = 20 m/s
+v = final velocity
+
+Substituting:
+
+(1800 × 0) + (450 × 20) = (1800 + 450)v
+
+9000 = 2250v
+
+v = 9000/2250
+
+v = 4 m/s
+
+Why the other options are incorrect:
+
+• 4 m/s is correct because it satisfies conservation of momentum.
+• 16 m/s is too large; the combined mass is much greater than the moving car alone.
+• 6 m/s does not satisfy conservation of momentum.
+• 8 m/s does not satisfy conservation of momentum.
+
+Therefore, the correct answer is 4 m/s.`
+},
+{
+    question: "A 75 kg man standing in an elevator notes that as the elevator rises, the scale reads 825 N. What is the acceleration of the elevator? (g = 9.8 m/s²)",
+    options: [
+        "1 m/s² downward",
+        "1 m/s² upward",
+        "1.2 m/s² upward",
+        "1.2 m/s² downward"
+    ],
+    answer: "1.2 m/s² upward",
+    explanation: `The scale reading is the normal reaction force acting on the man.
+
+When the elevator accelerates upward:
+
+N = m(g + a)
+
+Where:
+N = 825 N
+m = 75 kg
+g = 9.8 m/s²
+a = acceleration
+
+Substituting:
+
+825 = 75(9.8 + a)
+
+Dividing both sides by 75:
+
+11 = 9.8 + a
+
+a = 11 - 9.8
+
+a = 1.2 m/s²
+
+Since the scale reading (825 N) is greater than the man's actual weight:
+
+Weight = mg = 75 × 9.8 = 735 N
+
+The elevator must be accelerating upward.
+
+Why the other options are incorrect:
+
+• 1 m/s² downward is incorrect because a downward acceleration would make the scale reading less than the true weight.
+• 1 m/s² upward gives a scale reading different from 825 N.
+• 1.2 m/s² upward is correct because it satisfies the equation N = m(g + a).
+• 1.2 m/s² downward is incorrect because the scale reading would be less than 735 N.
+
+Therefore, the correct answer is 1.2 m/s² upward.`
+},
+{
+    question: "A 7.80 g bullet moving at 575 m/s penetrates a tree trunk to a depth of 5.50 cm. Determine the average frictional force that stops the bullet.",
+    options: [
+        "3.45 × 10⁴ N",
+        "2.34 × 10⁴ N",
+        "2.58 × 10⁴ N",
+        "5.25 × 10⁴ N"
+    ],
+    answer: "2.34 × 10⁴ N",
+    explanation: `The frictional force does work equal to the bullet's initial kinetic energy.
+
+First convert the units:
+
+Mass = 7.80 g = 0.00780 kg
+Distance = 5.50 cm = 0.0550 m
+
+The initial kinetic energy is:
+
+K.E. = ½mv²
+
+K.E. = ½ × 0.00780 × (575)²
+K.E. = 1289.4 J
+
+The work done by friction is:
+
+W = Fd
+
+Since friction brings the bullet to rest:
+
+Fd = K.E.
+
+Therefore:
+
+F = K.E. / d
+
+F = 1289.4 / 0.0550
+
+F ≈ 2.34 × 10⁴ N
+
+Why the other options are incorrect:
+
+• 3.45 × 10⁴ N is too large and does not result from dividing the kinetic energy by the penetration distance.
+• 2.34 × 10⁴ N is correct.
+• 2.58 × 10⁴ N gives a larger force than the calculated value.
+• 5.25 × 10⁴ N is more than twice the calculated force.
+
+Therefore, the correct answer is 2.34 × 10⁴ N.`
+},
+{
+  question: "A ball of mass 250g loses one third of its velocity when it makes a head-on collision with an identical ball B at rest. After collision, B moves off with a speed of 2 m/s in the original direction of A. The initial velocity of A is ____.",
+  options: [
+    "2.5 m/s",
+    "4.5 m/s",
+    "5.2 m/s",
+    "6.0 m/s"
+  ],
+  answer: "6.0 m/s",
+  explanation: `Let the initial velocity of A be u.
+
+A loses one third of its velocity, so its velocity after the collision is:
+
+u - u/3 = 2u/3
+
+Since the balls have identical masses, conservation of momentum gives:
+
+mu = m(2u/3) + m(2)
+
+Cancel m:
+
+u = 2u/3 + 2
+
+u/3 = 2
+
+u = 6 m/s
+
+Therefore, the initial velocity of A was 6.0 m/s.
+
+Why the other options are incorrect:
+
+• 2.5 m/s does not satisfy conservation of momentum.
+• 4.5 m/s does not satisfy the momentum equation.
+• 5.2 m/s does not satisfy the momentum equation.
+• 6.0 m/s satisfies conservation of momentum.
+
+Therefore, the correct answer is 6.0 m/s.`
+},
+{
+  question: "A container is filled to a depth of 20 cm with water. On top of the water floats a 30 cm thick layer of oil with specific gravity of 0.7. What is the absolute pressure at the bottom of the container?",
+  options: [
+    "0.055 × 10⁵ Pa",
+    "1.96 × 10⁵ Pa",
+    "3.43 × 10⁵ Pa",
+    "1.055 × 10⁵ Pa"
+  ],
+  answer: "1.055 × 10⁵ Pa",
+  explanation: `The pressure at the bottom is the atmospheric pressure plus the pressure due to the water and oil columns.
+
+For the water:
+
+P_water = ρgh
+= 1000 × 9.8 × 0.20
+= 1960 Pa
+
+The specific gravity of oil is 0.7, so:
+
+ρ_oil = 0.7 × 1000 = 700 kg/m³
+
+Pressure due to the oil:
+
+P_oil = 700 × 9.8 × 0.30
+= 2058 Pa
+
+Taking atmospheric pressure as approximately 1.013 × 10⁵ Pa:
+
+P_total = 1.013 × 10⁵ + 1960 + 2058
+≈ 1.055 × 10⁵ Pa
+
+Therefore, the correct answer is 1.055 × 10⁵ Pa.`
+},
+{
+  question: "A small ferryboat is 4.0 m wide and 6.0 m long. When a loaded truck pulls into it, the boat sinks an additional 4.0 cm into the river. What is the weight of the truck?",
+  options: [
+    "960 N",
+    "760 N",
+    "9600 N",
+    "850 N"
+  ],
+  answer: "9600 N",
+  explanation: `When the truck enters the boat, the boat displaces additional water equal to the volume of the submerged portion.
+
+Volume displaced:
+
+V = length × width × additional depth
+
+V = 6.0 × 4.0 × 0.040
+
+V = 0.96 m³
+
+The mass of the displaced water is:
+
+m = ρV
+= 1000 × 0.96
+= 960 kg
+
+Therefore, the weight of the displaced water is:
+
+W = mg
+≈ 960 × 10
+= 9600 N
+
+By Archimedes' principle, this additional buoyant force equals the weight of the truck.
+
+Therefore, the correct answer is 9600 N.`
+},
+{
+  question: "An object of mass 2.0 kg is oscillating freely on a vertical spring with a period of 0.6 s. Another object of unknown mass on the same spring oscillates with a period of 1.05 s. Find the unknown mass.",
+  options: [
+    "2.2 kg",
+    "1.3 kg",
+    "5.2 kg",
+    "6.1 kg"
+  ],
+  answer: "6.1 kg",
+  explanation: `For a mass-spring system:
+
+T = 2π√(m/k)
+
+Since the same spring is used:
+
+T₁/T₂ = √(m₁/m₂)
+
+Therefore:
+
+m₂ = m₁(T₂/T₁)²
+
+m₂ = 2.0(1.05/0.60)²
+
+m₂ ≈ 6.13 kg
+
+Therefore, the unknown mass is approximately 6.1 kg.
+
+Therefore, the correct answer is 6.1 kg.`
+},
+{
+  question: "What happens to the speed of a wave on a string when the frequency is doubled? Assume the tension in the string remains the same.",
+  options: [
+    "Increases by two",
+    "Decreases by two",
+    "Increases by four",
+    "Unaffected"
+  ],
+  answer: "Unaffected",
+  explanation: `The speed of a wave on a stretched string is:
+
+v = √(T/μ)
+
+Since the tension and mass per unit length remain unchanged, the wave speed remains unchanged.
+
+Doubling the frequency changes the wavelength instead, because:
+
+v = fλ
+
+If the frequency doubles while the speed remains constant, the wavelength is halved.
+
+Therefore, the correct answer is Unaffected.`
+},
+{
+  question: "A small object of mass 3.80 g and charge −18 μC is suspended motionless above the ground when immersed in a uniform electric field perpendicular to the ground. What is the magnitude and direction of the electric field?",
+  options: [
+    "2.1 × 10³ N/C upward",
+    "2.1 × 10³ N/C downward",
+    "2.1 × 10⁵ N/C upward",
+    "2.1 × 10⁵ N/C downward"
+  ],
+  answer: "2.1 × 10³ N/C downward",
+  explanation: `The object is motionless, so the electric force must balance its weight.
+
+|q|E = mg
+
+Therefore:
+
+E = mg/|q|
+
+m = 3.80 g = 0.00380 kg
+q = 18 μC = 18 × 10⁻⁶ C
+
+E = (0.00380 × 9.8)/(18 × 10⁻⁶)
+
+E ≈ 2.1 × 10³ N/C
+
+The charge is negative, so its electric force is opposite to the direction of the electric field.
+
+The electric force must act upward to balance gravity. Therefore, the electric field must point downward.
+
+Therefore, the correct answer is 2.1 × 10³ N/C downward.`
+},
+{
+  question: "A uniform electric field of magnitude 375 N/C pointing in the positive x-direction acts on an electron initially at rest. What is the work done by the field on the electron when it has moved 3.20 cm?",
+  options: [
+    "1.92 × 10⁻¹⁸ J",
+    "−1.92 × 10⁻¹⁸ J",
+    "1.92 × 10⁻¹⁷ J",
+    "−1.92 × 10⁻¹⁷ J"
+  ],
+  answer: "1.92 × 10⁻¹⁸ J",
+  explanation: `The electron has a negative charge, so the electric force on it is opposite to the direction of the electric field.
+
+The field points in the positive x-direction, so the electron accelerates in the negative x-direction. Its displacement is therefore in the same direction as the electric force.
+
+The work done by the field is:
+
+W = |q|Ed
+
+Given:
+
+|q| = 1.60 × 10⁻¹⁹ C
+E = 375 N/C
+d = 3.20 cm = 0.0320 m
+
+Therefore:
+
+W = (1.60 × 10⁻¹⁹)(375)(0.0320)
+
+W = 1.92 × 10⁻¹⁸ J
+
+The work is positive because the electric force and displacement are in the same direction.
+
+Therefore, the correct answer is 1.92 × 10⁻¹⁸ J.`
+},
+{
+  question: "A parallel-plate capacitor filled with air carries a charge Q. The battery is disconnected, and a slab of dielectric constant k = 2 is inserted between the plates. Which statement is correct?",
+  options: [
+    "The voltage across the capacitor decreases by a factor of 2",
+    "The voltage across the capacitor is doubled",
+    "The charge on the plates is doubled",
+    "The charge on the plates decreases by a factor of 2"
+  ],
+  answer: "The voltage across the capacitor decreases by a factor of 2",
+  explanation: `The battery is disconnected, so the charge Q on the capacitor remains constant.
+
+Inserting a dielectric with dielectric constant k increases the capacitance:
+
+C' = kC
+
+Since:
+
+V = Q/C
+
+and Q remains constant, increasing the capacitance by a factor of 2 decreases the voltage by a factor of 2.
+
+Therefore:
+
+V' = V/2
+
+Therefore, the correct answer is The voltage across the capacitor decreases by a factor of 2.`
+},
+{
+  question: "A thin converging lens has a focal length of 8.0 cm. If a real, inverted image is located 12.0 cm to the right of the lens, where is the object located?",
+  options: [
+    "12.0 cm to the left of the lens",
+    "24.0 cm to the right of the lens",
+    "24.0 cm to the left of the lens",
+    "18.0 cm to the right of the lens"
+  ],
+  answer: "24.0 cm to the left of the lens",
+  explanation: `Using the thin-lens equation:
+
+1/f = 1/u + 1/v
+
+Given:
+
+f = 8.0 cm
+v = 12.0 cm
+
+Therefore:
+
+1/u = 1/8 - 1/12
+
+1/u = 1/24
+
+u = 24 cm
+
+Because the image is real and inverted, the object is on the opposite side of the lens from the image.
+
+Therefore, the object is 24.0 cm to the left of the lens.
+
+Therefore, the correct answer is 24.0 cm to the left of the lens.`
+},
+{
+  question: "The primary coil of a transformer has 250 turns and its secondary coil has 1500 turns. If the output voltage across the primary coil is 170 V sin ωt, what rms voltage is developed across the secondary coil?",
+  options: [
+    "1020 V",
+    "721 V",
+    "800 V",
+    "200 V"
+  ],
+  answer: "721 V",
+  explanation: `For an ideal transformer:
+
+Vₛ/Vₚ = Nₛ/Nₚ
+
+The primary voltage is:
+
+Vₚ = 170 sin(ωt)
+
+Therefore, 170 V is the peak voltage. Its rms value is:
+
+Vₚ(rms) = 170/√2 ≈ 120.2 V
+
+The turns ratio is:
+
+Nₛ/Nₚ = 1500/250 = 6
+
+Therefore:
+
+Vₛ(rms) = 6 × 120.2
+≈ 721 V
+
+Therefore, the correct answer is 721 V.`
+},
+{
+  question: "A large crate of mass m is placed on the back of a truck but not tied down. As the truck accelerates forward with an acceleration a, the crate remains at rest relative to the truck. What force causes the crate to accelerate forward?",
+  options: [
+    "The normal force",
+    "The force of gravity",
+    "The force of friction between the crate and the floor of the truck",
+    "The 'ma' force"
+  ],
+  answer: "The force of friction between the crate and the floor of the truck",
+  explanation: `The crate must accelerate forward along with the truck.
+
+The horizontal force that accelerates the crate is static friction between the crate and the truck bed.
+
+The frictional force acts forward on the crate and provides the required force:
+
+F = ma
+
+Therefore, the correct answer is The force of friction between the crate and the floor of the truck.`
+},
+{
+  question: "Lubricants used in machines to reduce friction ____.",
+  options: [
+    "Increase the velocity ratio",
+    "Decrease the velocity ratio",
+    "Reduce the mechanical advantage",
+    "Increase the mechanical efficiency"
+  ],
+  answer: "Increase the mechanical efficiency",
+  explanation: `Lubricants reduce friction between moving parts of a machine.
+
+Less friction means less energy is wasted as heat, so a greater proportion of the input energy is converted into useful output work.
+
+Therefore, lubrication increases the mechanical efficiency of a machine.
+
+Therefore, the correct answer is Increase the mechanical efficiency.`
+},
+{
+  question: "The potential difference between the plates of a TV set is about 25 kV. If the distance between the plates is 1.5 cm, find the magnitude of the uniform electric field in the region between the plates.",
+  options: [
+    "1.67 × 10⁵ N/C",
+    "1.67 × 10⁶ N/C",
+    "2.50 × 10⁶ N/C",
+    "16.7 × 10⁷ N/C"
+  ],
+  answer: "1.67 × 10⁶ N/C",
+  explanation: `For a uniform electric field:
+
+E = V/d
+
+Convert the quantities:
+
+V = 25 kV = 25,000 V
+d = 1.5 cm = 0.015 m
+
+Therefore:
+
+E = 25,000/0.015
+
+E ≈ 1.67 × 10⁶ N/C
+
+Therefore, the correct answer is 1.67 × 10⁶ N/C.`
+},
+{
+  question: "A wire carries a current of 10.0 A in a direction that makes an angle of 30° with the direction of a magnetic field of strength 0.300 T. Find the magnetic force on a 5.0 m length of the wire.",
+  options: [
+    "75 N",
+    "7.5 N",
+    "15 N",
+    "1.5 N"
+  ],
+  answer: "7.5 N",
+  explanation: `The magnetic force on a current-carrying wire is:
+
+F = BIL sinθ
+
+Given:
+
+B = 0.300 T
+I = 10.0 A
+L = 5.0 m
+θ = 30°
+
+Therefore:
+
+F = 0.300 × 10.0 × 5.0 × sin30°
+
+Since sin30° = 0.5:
+
+F = 7.5 N
+
+Therefore, the correct answer is 7.5 N.`
+},
+{
+  question: "At a certain instant, a proton is moving in the positive x-direction through a magnetic field in the negative z-direction. What is the direction of the magnetic force exerted on the proton?",
+  options: [
+    "Positive z-direction",
+    "Negative z-direction",
+    "Positive y-direction",
+    "Negative y-direction"
+  ],
+  answer: "Positive y-direction",
+  explanation: `The magnetic force on a charged particle is:
+
+F = q(v × B)
+
+The proton has a positive charge, so the force follows the direction of v × B.
+
+The proton moves in the +x direction and the magnetic field points in the −z direction.
+
+Using the right-hand rule:
+
++x × (−z) = +y
+
+Therefore, the magnetic force acts in the positive y-direction.
+
+Therefore, the correct answer is Positive y-direction.`
+},
+{
+  question: "When two unknown resistors are connected in series with a battery, the battery delivers 225 W and carries a total current of 5 A. For the same total current, 50 W is delivered when the resistors are connected in parallel. Determine the value of each resistor.",
+  options: [
+    "5 Ω and 7 Ω",
+    "2 Ω and 8 Ω",
+    "6 Ω and 3 Ω",
+    "10 Ω and 5 Ω"
+  ],
+  answer: "6 Ω and 3 Ω",
+  explanation: `First determine the equivalent resistance in series.
+
+P = I²R
+
+R_series = 225/(5²)
+= 9 Ω
+
+For the parallel arrangement:
+
+R_parallel = 50/(5²)
+= 2 Ω
+
+Let the resistors be R₁ and R₂.
+
+R₁ + R₂ = 9
+
+R₁R₂/(R₁ + R₂) = 2
+
+Therefore:
+
+R₁R₂ = 18
+
+The two resistors are 6 Ω and 3 Ω.
+
+Therefore, the correct answer is 6 Ω and 3 Ω.`
+},
+{
+  question: "After 2 days the activity of a sample of an unknown radioactive material has decreased to 84.2% of the initial activity. What is the half-life of this material?",
+  options: [
+    "6.82 days",
+    "8.06 days",
+    "7.51 days",
+    "5.22 days"
+  ],
+  answer: "8.06 days",
+  explanation: `Radioactive activity follows:
+
+A/A₀ = (1/2)^(t/T₁/₂)
+
+The remaining activity is 84.2%, so:
+
+0.842 = (1/2)^(2/T₁/₂)
+
+Taking logarithms:
+
+T₁/₂ = 2ln(1/2)/ln(0.842)
+
+T₁/₂ ≈ 8.06 days
+
+Therefore, the correct answer is 8.06 days.`
+},
+{
+  question: "Which one of the following phenomena most clearly demonstrates the particle nature of light?",
+  options: [
+    "Diffraction",
+    "Photoelectric effect",
+    "Polarization",
+    "Interference"
+  ],
+  answer: "Photoelectric effect",
+  explanation: `The photoelectric effect demonstrates that light transfers energy to electrons in discrete packets called photons.
+
+This provides strong evidence for the particle nature of light.
+
+Why the other options are incorrect:
+
+• Diffraction demonstrates the wave nature of light.
+• Photoelectric effect is correct because it demonstrates the quantized, particle-like transfer of light energy.
+• Polarization is a wave phenomenon.
+• Interference is a characteristic wave phenomenon.
+
+Therefore, the correct answer is Photoelectric effect.`
+},
+{
+  question: "A nearsighted woman can't see objects clearly beyond 40.0 cm (her far point). If she has no astigmatism and contact lenses are prescribed, what power and type of lens are required to correct her condition?",
+  options: [
+    "2.5 D, converging lens",
+    "-2.5 D, diverging lens",
+    "0.025 D, converging lens",
+    "-0.025 D, diverging lens"
+  ],
+  answer: "-2.5 D, diverging lens",
+  explanation: `For a nearsighted person, a distant object must be brought to the person's far point.
+
+The far point is 40.0 cm:
+
+f = −0.40 m
+
+The negative focal length indicates a diverging lens.
+
+The lens power is:
+
+P = 1/f
+
+P = 1/(−0.40)
+
+P = −2.5 D
+
+Therefore, the required lens is a −2.5 D diverging lens.
+
+Therefore, the correct answer is −2.5 D, diverging lens.`
+},
+{
+  question: "What type of spherical mirror should be used to form an image five times as tall as an object on a screen positioned 50 m from the mirror?",
+  options: [
+    "Concave with focal length 8.33 m",
+    "Convex with focal length 1.2 m",
+    "Concave with focal length 0.83 m",
+    "Convex with focal length 8.33 m"
+  ],
+  answer: "Concave with focal length 8.33 m",
+  explanation: `Since the image is formed on a screen, it must be a real image. A real, inverted and magnified image is produced by a concave mirror.
+
+The magnification is:
+
+m = −5
+
+For a spherical mirror:
+
+m = −v/u
+
+Therefore:
+
+−5 = −v/u
+
+v = 5u
+
+The image is 50 m from the mirror:
+
+50 = 5u
+
+u = 10 m
+
+Using the mirror equation:
+
+1/f = 1/u + 1/v
+
+1/f = 1/10 + 1/50
+
+1/f = 6/50 = 3/25
+
+Therefore:
+
+f = 25/3
+
+f ≈ 8.33 m
+
+Therefore, the correct answer is Concave with focal length 8.33 m.`
+},
+];
+
+
+        const biologyQuestions = [
+  {
+    question: "What is the function of the Krebs cycle in cellular respiration?",
+    options: [
+      "Utilization of ATP",
+      "Oxidation of glucose",
+      "Synthesis of glucose",
+      "Production of NADH and FADH2"
+    ],
+    answer: "Production of NADH and FADH2",
+    explanation: `The Krebs cycle, also called the citric acid cycle, occurs in the mitochondrial matrix in eukaryotic cells.
+
+Its major functions include producing reduced electron carriers such as NADH and FADH2, which carry high-energy electrons to the electron transport chain.
+
+Therefore, the correct answer is Production of NADH and FADH2.`
+  },
+  {
+    question: "In which phase of mitosis do sister chromatids separate and move to opposite poles of the cell?",
+    options: [
+      "Prophase",
+      "Metaphase",
+      "Anaphase",
+      "Telophase"
+    ],
+    answer: "Anaphase",
+    explanation: `During anaphase, the centromeres divide and the sister chromatids separate.
+
+The spindle fibres then pull the separated chromatids toward opposite poles of the cell.
+
+Therefore, the correct answer is Anaphase.`
+  },
+  {
+    question: "Which of the following is an example of a parasitic relationship?",
+    options: [
+      "Bee pollinating a flower",
+      "Lion hunting a zebra",
+      "Tapeworm living in the intestines of a mammal",
+      "Algae and fungi in lichens"
+    ],
+    answer: "Tapeworm living in the intestines of a mammal",
+    explanation: `Parasitism is a relationship in which one organism benefits while the other is harmed.
+
+A tapeworm obtains nutrients from its mammalian host while the host is harmed by the parasite.
+
+Therefore, the correct answer is Tapeworm living in the intestines of a mammal.`
+  },
+  {
+    question: "Which of the following is not a type of muscle tissue in the human body?",
+    options: [
+      "Skeletal",
+      "Cardiac",
+      "Smooth",
+      "Nervous"
+    ],
+    answer: "Nervous",
+    explanation: `The three types of muscle tissue in the human body are skeletal muscle, cardiac muscle, and smooth muscle.
+
+Nervous tissue is a separate type of tissue responsible mainly for receiving and transmitting nerve impulses.
+
+Therefore, the correct answer is Nervous.`
+  },
+  {
+    question: "Which of the following is a characteristic of a population in Hardy-Weinberg equilibrium?",
+    options: [
+      "Genetic drift",
+      "Mutation",
+      "Migration",
+      "No change in allele frequencies over time"
+    ],
+    answer: "No change in allele frequencies over time",
+    explanation: `A population in Hardy-Weinberg equilibrium has allele frequencies that remain constant from one generation to another.
+
+This requires the absence of evolutionary forces such as mutation, migration, natural selection, and genetic drift.
+
+Therefore, the correct answer is No change in allele frequencies over time.`
+  },
+  {
+    question: "Which of the following is not a type of ecological succession?",
+    options: [
+      "Primary succession",
+      "Secondary succession",
+      "Tertiary succession",
+      "None"
+    ],
+    answer: "Tertiary succession",
+    explanation: `The two major types of ecological succession are primary succession and secondary succession.
+
+Primary succession begins in an area where no soil previously existed, while secondary succession occurs where an existing community has been disturbed but soil remains.
+
+"Tertiary succession" is not a recognized major type of ecological succession.
+
+Therefore, the correct answer is Tertiary succession.`
+  },
+  {
+    question: "The role of the Calvin cycle in photosynthesis is:",
+    options: [
+      "Production of ATP",
+      "Splitting of water",
+      "Fixation of carbon dioxide",
+      "None"
+    ],
+    answer: "Fixation of carbon dioxide",
+    explanation: `The Calvin cycle is the series of reactions in photosynthesis in which carbon dioxide is fixed and ultimately incorporated into organic compounds.
+
+ATP and NADPH produced during the light-dependent reactions provide the energy and reducing power required by the Calvin cycle.
+
+Therefore, the correct answer is Fixation of carbon dioxide.`
+  },
+  {
+    question: "The following are functions of the integumentary system except:",
+    options: [
+      "Regulation of body temperature",
+      "Protection against pathogens",
+      "Production of hormones",
+      "Sensation of touch"
+    ],
+    answer: "Production of hormones",
+    explanation: `The integumentary system, which includes the skin, hair, nails, and associated glands, helps regulate body temperature, protects the body from pathogens, and provides sensory information.
+
+Although the skin is involved in producing vitamin D, it is not generally described as a system whose primary function is hormone production.
+
+Therefore, the correct answer is Production of hormones.`
+  },
+  {
+    question: "Which of the following is not a feature of the kingdom Fungi?",
+    options: [
+      "Autotrophic nutrition",
+      "Heterotrophic nutrition",
+      "Presence of cell walls made of chitin",
+      "Absorption of nutrients"
+    ],
+    answer: "Autotrophic nutrition",
+    explanation: `Fungi are heterotrophic organisms. They obtain nutrients by secreting digestive enzymes and absorbing the resulting soluble substances.
+
+Most fungi have cell walls containing chitin.
+
+Therefore, the correct answer is Autotrophic nutrition.`
+  },
+  {
+    question: "Equalization of air pressure between the middle ear and the environment is through the:",
+    options: [
+      "Tympanic membrane",
+      "Cochlea",
+      "Eustachian tube",
+      "Ear ossicles"
+    ],
+    answer: "Eustachian tube",
+    explanation: `The Eustachian tube connects the middle ear to the upper part of the throat.
+
+It allows air to move into or out of the middle ear, helping equalize air pressure on both sides of the eardrum.
+
+Therefore, the correct answer is Eustachian tube.`
+  },
+  {
+    question: "The semilunar valves in the heart:",
+    options: [
+      "Prevent backflow of blood into the ventricles",
+      "Prevent backflow of blood into the atria",
+      "Regulate heart rate",
+      "Transmit electrical signals between chambers"
+    ],
+    answer: "Prevent backflow of blood into the ventricles",
+    explanation: `The heart has two semilunar valves: the pulmonary valve and the aortic valve.
+
+They close after the ventricles contract to prevent blood from flowing back from the pulmonary artery and aorta into the ventricles.
+
+Therefore, the correct answer is Prevent backflow of blood into the ventricles.`
+  },
+  {
+    question: "Which of the following enzymes is responsible for unwinding DNA strands during DNA replication?",
+    options: [
+      "DNA polymerase",
+      "Helicase",
+      "RNA polymerase",
+      "Ligase"
+    ],
+    answer: "Helicase",
+    explanation: `Helicase is the enzyme responsible for unwinding the DNA double helix during DNA replication.
+
+It breaks the hydrogen bonds between complementary bases, separating the two DNA strands so they can be copied.
+
+Therefore, the correct answer is Helicase.`
+  },
+  {
+    question: "What is the role of the enzyme RuBisCo in photosynthesis?",
+    options: [
+      "Fixation of carbon dioxide",
+      "Splitting of water molecules",
+      "Synthesis of glucose",
+      "Absorption of light energy"
+    ],
+    answer: "Fixation of carbon dioxide",
+    explanation: `RuBisCo is an enzyme involved in the first major step of the Calvin cycle.
+
+It catalyses the fixation of carbon dioxide by combining CO₂ with ribulose-1,5-bisphosphate (RuBP).
+
+Therefore, the correct answer is Fixation of carbon dioxide.`
+  },
+  {
+    question: "Which of the following cell types is responsible for bone resorption in the skeletal system?",
+    options: [
+      "Osteoblasts",
+      "Osteocytes",
+      "Osteoclasts",
+      "Chondrocytes"
+    ],
+    answer: "Osteoclasts",
+    explanation: `Osteoclasts are specialized cells that break down bone tissue during bone resorption.
+
+Osteoblasts are mainly responsible for forming new bone, while osteocytes are mature bone cells.
+
+Therefore, the correct answer is Osteoclasts.`
+  },
+  {
+    question: "What is the role of the enzyme reverse transcriptase in retroviruses?",
+    options: [
+      "Synthesis of RNA from DNA",
+      "Synthesis of DNA from RNA",
+      "Cleavage of DNA",
+      "Repair of DNA"
+    ],
+    answer: "Synthesis of DNA from RNA",
+    explanation: `Retroviruses contain RNA as their genetic material.
+
+Reverse transcriptase uses the viral RNA as a template to synthesize complementary DNA (cDNA), which can subsequently become double-stranded DNA.
+
+Therefore, the correct answer is Synthesis of DNA from RNA.`
+  },
+  {
+    question: "Which of the following cell types is responsible for synthesizing myelin in the central nervous system?",
+    options: [
+      "Astrocytes",
+      "Oligodendrocytes",
+      "Microglia",
+      "Schwann cells"
+    ],
+    answer: "Oligodendrocytes",
+    explanation: `Oligodendrocytes are glial cells that produce the myelin sheath around axons in the central nervous system.
+
+Schwann cells perform a similar function in the peripheral nervous system.
+
+Therefore, the correct answer is Oligodendrocytes.`
+  },
+  {
+    question: "Which of the following is/are not true of asexual reproduction?",
+    options: [
+      "Involves the fusion of gametes",
+      "Offspring genetically identical to parent",
+      "Common in plants",
+      "Faster than sexual reproduction"
+    ],
+    answer: "Involves the fusion of gametes",
+    explanation: `Asexual reproduction involves only one parent and does not involve the fusion of male and female gametes.
+
+It commonly produces offspring that are genetically very similar or identical to the parent and is generally faster than sexual reproduction.
+
+Therefore, the correct answer is Involves the fusion of gametes.`
+  },
+  {
+    question: "Phenotype is determined by:",
+    options: [
+      "Genotype only",
+      "Environment only",
+      "Both genotype and environment",
+      "Neither genotype nor environment"
+    ],
+    answer: "Both genotype and environment",
+    explanation: `A phenotype is the observable characteristics of an organism.
+
+These characteristics result from the interaction between the organism's genotype and environmental factors.
+
+Therefore, the correct answer is Both genotype and environment.`
+  },
+  {
+    question: "Which of the following is the correct sequence of events in cellular respiration?",
+    options: [
+      "Glycolysis → Electron transport chain → Krebs cycle",
+      "Krebs cycle → Glycolysis → Electron transport chain",
+      "Glycolysis → Krebs cycle → Electron transport chain",
+      "Krebs cycle → Electron transport chain → Glycolysis"
+    ],
+    answer: "Glycolysis → Krebs cycle → Electron transport chain",
+    explanation: `In aerobic cellular respiration, glycolysis occurs first and breaks glucose into pyruvate.
+
+The products of glycolysis enter processes that lead to the Krebs cycle, where more reduced electron carriers are produced.
+
+The electrons carried by NADH and FADH₂ are then used by the electron transport chain to generate ATP.
+
+Therefore, the correct answer is Glycolysis → Krebs cycle → Electron transport chain.`
+  },
+  {
+    question: "Which of the following is a characteristic of anaerobic respiration?",
+    options: [
+      "It occurs only in the presence of oxygen",
+      "It produces carbon dioxide and water as by-products",
+      "It does not require oxygen",
+      "It results in a higher yield of ATP compared to aerobic respiration"
+    ],
+    answer: "It does not require oxygen",
+    explanation: `Anaerobic respiration occurs without the use of oxygen.
+
+It generally produces much less ATP than aerobic respiration because glucose is not completely oxidized.
+
+Therefore, the correct answer is It does not require oxygen.`
+  },
+  {
+    question: "The part of amphibian eggs that allows respiratory gas to pass through is",
+    options: ["Chorion", "Amnion", "Yolk sac", "Allantois"],
+    answer: "Chorion",
+    year: null,
+    explanation: `The chorion is the outer membrane surrounding the embryo and helps allow the exchange of respiratory gases.
+
+In amphibian eggs, the jelly surrounding the eggs also permits the diffusion of oxygen and carbon dioxide.
+
+Therefore, the correct answer is Chorion.`
+  },
+  {
+    question: "Lampbrush chromosome occurs in",
+    options: ["Salivary gland", "Lymph glands", "Cancer cells", "Oocytes"],
+    answer: "Oocytes",
+    year: null,
+    explanation: `Lampbrush chromosomes are highly extended chromosomes found in the nuclei of growing oocytes of many animals.
+
+Their extended structure allows active transcription of many genes during oocyte development.
+
+Therefore, the correct answer is Oocytes.`
+  },
+  {
+    question: "Reiter's syndrome is the name formerly given to a form of",
+    options: ["Body odour", "Stomach disorder", "Reactive arthritis", "Gout"],
+    answer: "Reactive arthritis",
+    year: null,
+    explanation: `Reiter's syndrome is an older term for reactive arthritis, a type of inflammatory arthritis that can occur following certain infections.
+
+The term "reactive arthritis" is preferred in modern medical terminology.
+
+Therefore, the correct answer is Reactive arthritis.`
+  },
+  {
+    question: "In a plant exhibiting alternation of generations, the diploid multicellular stage is known as",
+    options: ["Pteridophyte", "Gametophyte", "Holophyte", "Sporophyte"],
+    answer: "Sporophyte",
+    year: null,
+    explanation: `In plants with alternation of generations, the sporophyte is the diploid multicellular stage.
+
+It develops from the fertilized egg and produces haploid spores through meiosis.
+
+The gametophyte is the haploid multicellular stage.
+
+Therefore, the correct answer is Sporophyte.`
+  },
+  {
+    question: "The two types of human tapeworm can be distinguished by the presence or absence of",
+    options: ["Scolex", "Hook", "Proglottides", "Sucker"],
+    answer: "Hook",
+    year: null,
+    explanation: `The two important human Taenia species are Taenia solium and Taenia saginata.
+
+Taenia solium has hooks on its scolex, whereas Taenia saginata lacks hooks.
+
+Therefore, the correct answer is Hook.`
+  },
+  {
+    question: "The axial skeleton of a mammal does not include the bones of the",
+    options: ["Skull", "Neck", "Limbs", "Back"],
+    answer: "Limbs",
+    year: null,
+    explanation: `The axial skeleton consists mainly of the skull, vertebral column, ribs, and sternum.
+
+The bones of the limbs belong to the appendicular skeleton.
+
+Therefore, the correct answer is Limbs.`
+  },
+  {
+    question: "The figure above is a section of a drupe. The part numbered 2 is",
+    options: ["Epicarp", "Seed", "Endocarp", "Mesocarp"],
+    answer: "Mesocarp",
+    year: null,
+    image: "https://i.ibb.co/jPm1JKDc/IMG-20260813-212924-465.webp",
+    explanation: `A drupe is a type of fruit with three main layers in its fruit wall.
+
+The epicarp is the outer layer, the mesocarp is the fleshy middle layer, and the endocarp is the hard inner layer surrounding the seed.
+
+In the supplied figure, part 2 represents the mesocarp.
+
+Therefore, the correct answer is Mesocarp.`
+  },
+  {
+    question: "In plants, the structure that performs a similar function as the testis in mammals is the",
+    options: ["Stigma", "Filament", "Anther", "Receptacle"],
+    answer: "Anther",
+    year: null,
+    explanation: `The testis in mammals produces male gametes called sperm cells.
+
+The anther is the part of a flower that produces pollen grains, which contain the male gametes of flowering plants.
+
+Therefore, the correct answer is Anther.`
+  },
+  {
+    question: "The irreversible life process by which new protoplasm is added to increase the size and weight of an organism can be termed",
+    options: ["Anabolism", "Catabolism", "Growth", "Development"],
+    answer: "Growth",
+    year: null,
+    explanation: `Growth is the irreversible increase in the size, mass, or dry weight of an organism.
+
+It results from processes such as cell division and the production of new cellular materials.
+
+Therefore, the correct answer is Growth.`
+  },
+  {
+    question: "The sex of a foetus is determined during",
+    options: ["Meiosis", "Copulation", "Fertilization", "Placentation"],
+    answer: "Fertilization",
+    year: null,
+    explanation: `The sex of a human embryo is determined genetically at fertilization.
+
+The ovum always contributes an X chromosome, while the fertilizing sperm contributes either an X or a Y chromosome.
+
+XX generally results in a female and XY generally results in a male.
+
+Therefore, the correct answer is Fertilization.`
+  },
+  {
+    question: "When it is cold, the blood vessels of the skin ____.",
+    options: [
+      "Dilate to increase the amount of blood flowing to the skin",
+      "Constrict to reduce the amount of blood flowing to the skin",
+      "Dilate to reduce the amount of blood flowing to the skin",
+      "Constrict to increase the amount of blood flowing to the skin"
+    ],
+    answer: "Constrict to reduce the amount of blood flowing to the skin",
+    explanation: `When the body is exposed to cold conditions, the blood vessels near the skin constrict.
+
+This reduces blood flow to the skin and decreases heat loss from the body's surface.
+
+Therefore, the correct answer is Constrict to reduce the amount of blood flowing to the skin.`
+  },
+  {
+    question: "If an animal is very active and has good muscular control, it is likely to have a well-developed ____.",
+    options: [
+      "Olfactory lobes",
+      "Cerebellum",
+      "Optic lobes",
+      "Medulla oblongata"
+    ],
+    answer: "Cerebellum",
+    explanation: `The cerebellum is involved in coordinating voluntary movements, maintaining balance, posture, and fine muscular control.
+
+An animal with well-developed muscular coordination would therefore be expected to have a well-developed cerebellum.
+
+Therefore, the correct answer is Cerebellum.`
+  },
+  {
+    question: "The sequence of ear ossicles from the fenestra ovalis is ____.",
+    options: [
+      "Malleus, stapes and incus",
+      "Malleus, incus and stapes",
+      "Stapes, malleus and incus",
+      "Stapes, incus and malleus"
+    ],
+    answer: "Stapes, incus and malleus",
+    explanation: `The three auditory ossicles are the malleus, incus, and stapes.
+
+The stapes is attached to the fenestra ovalis (oval window). From the oval window toward the tympanic membrane, the sequence is stapes → incus → malleus.
+
+Therefore, the correct answer is Stapes, incus and malleus.`
+  },
+  {
+    question: "Which of the following food chains is not possible in a forest?",
+    options: [
+      "Diatom → fly → toad → snake",
+      "Fly → toad → snake → hawk",
+      "Leaves → antelope → man",
+      "Leaves → caterpillar → bird → lion"
+    ],
+    answer: "Diatom → fly → toad → snake",
+    explanation: `Diatoms are microscopic aquatic organisms and are mainly found in water.
+
+Therefore, a food chain beginning with a diatom is not a typical terrestrial forest food chain.
+
+The other chains involve organisms that can occur in terrestrial environments, although some are less common than others.
+
+Therefore, the correct answer is Diatom → fly → toad → snake.`
+  },
+  {
+    question: "In the whistling pine, leaves are reduced to brown scales and young stems are green. This is an adaptation for ____.",
+    options: [
+      "Obtaining food",
+      "Conserving nutrients",
+      "Reducing transpiration",
+      "Storing food and water"
+    ],
+    answer: "Reducing transpiration",
+    explanation: `Whistling pine has greatly reduced leaves, which decreases the surface area through which water can be lost.
+
+The green young stems can carry out photosynthesis, compensating for the reduced leaves.
+
+Therefore, the reduced leaves are mainly an adaptation for reducing transpiration.`
+  },
+  {
+    question: "If a baby is a male, his mother's ovum must have been fertilized by a sperm carrying the chromosome ____.",
+    options: [
+      "X",
+      "XX",
+      "XY",
+      "Y"
+    ],
+    answer: "Y",
+    explanation: `The human ovum always carries an X chromosome.
+
+A male child normally has an XY chromosome combination, so the sperm must contribute a Y chromosome.
+
+Therefore, the correct answer is Y.`
+  },
+  {
+    question: "On what structures are the units of inheritance situated?",
+    options: [
+      "Golgi bodies",
+      "Ribosomes",
+      "Chromosomes",
+      "Endoplasmic reticulum"
+    ],
+    answer: "Chromosomes",
+    explanation: `The basic units of inheritance are genes.
+
+Genes are segments of DNA located on chromosomes, which are found in the nucleus of eukaryotic cells.
+
+Therefore, the correct answer is Chromosomes.`
+  },
+  {
+    question: "The nitrogenous base not found in DNA is ____.",
+    options: [
+      "Cytosine",
+      "Adenine",
+      "Thymine",
+      "Uracil"
+    ],
+    answer: "Uracil",
+    explanation: `The four nitrogenous bases found in DNA are adenine, thymine, cytosine, and guanine.
+
+Uracil is found in RNA and takes the place of thymine.
+
+Therefore, the correct answer is Uracil.`
+  },
+  {
+    question: "If an organism obtains its food by means of haustoria, it is said to be______.",
+    options: [
+      "Holophytic",
+      "Saprophytic",
+      "Parasitic",
+      "Dead"
+    ],
+    answer: "Parasitic",
+    explanation: `Haustoria are specialized structures produced by parasitic plants and fungi to penetrate the tissues of a host and absorb nutrients from it.
+
+An organism that obtains nutrients from a living host using haustoria is therefore parasitic.
+
+Therefore, the correct answer is Parasitic.`
+  },
+  {
+    question: "An animal body that can be cut along its axis in any plane to give two identical parts is said to be ____.",
+    options: [
+      "Radially symmetrical",
+      "Asymmetrical",
+      "Bilaterally symmetrical",
+      "Doubly symmetrical"
+    ],
+    answer: "Radially symmetrical",
+    explanation: `An organism with radial symmetry can be divided into similar halves by several planes passing through its central axis.
+
+In contrast, a bilaterally symmetrical organism can be divided into two similar halves along only one particular plane.
+
+Therefore, the correct answer is Radially symmetrical.`
+}
+];
+// ============================================
+// 2. DOM REFERENCES & GLOBAL STATE
+// ============================================
+
+/* DOM element references for UI manipulation */
+        const labels = document.querySelectorAll("label");
+        let displayState = document.getElementById("s1");
+        let subject = document.getElementById("intro");
+        let questionDisplay = document.getElementById("questions");
+        let questionText = document.getElementById("question")
+        let numberQuestion = document.getElementById("numberQuestion")
+        let backButton = document.getElementById("back")
+        let backButton1 = document.querySelector(".backbutton")
+        let submitPage = document.getElementById("submitpage")
+        let label = document.querySelectorAll("label")
+        let mark = document.querySelector(".mark")
+        let percentage = document.getElementById("percentage")
+        let image = document.getElementById("questionImage")
+        let time = document.getElementById("time");
+        let selectTime = document.getElementById("selecttime");
+        let credits = document.getElementById("credits")
+        let attempt = document.getElementById("attempted")
+        let miss = document.getElementById("missed")
+        let skip = document.getElementById("skipped")
+        let total = document.getElementById("totalquestions")
+        let progress = document.getElementById("progress")
+        let review = document.querySelector(".review")
+        let reviewQuestionQuestion = document.getElementById("question1")
+        let label1 = document.querySelectorAll(".label1")
+        let reviewNextButton = document.getElementById("reviewNext")
+        let reviewPreviousButton = document.getElementById("reviewPrevious")
+        let explanationText = document.querySelector(".explanation")
+        let reviewArray = []
+        let interval;
+        let timeRemaining = 0;
+        let score = 0;
+        let scoreArray = [];
+        let missed = 0
+        let skipped = 0
+        let attemptCount = 0
+        let currentQuestion = 0;
+        let currentSubject;
+    /* to transition to the selection screen*/
+    // ============================================
+// 3. NAVIGATION & SCREEN TRANSITIONS
+// ============================================
+
+/*
+ * Transitions from intro page to subject selection page.
+ * Hides intro, shows subject selection with fade animation.
+ */
+        function start(){
+            displayState.style.display = "flex";
+            displayState.style.animation ="fadein 0.5s ease"
+            subject.style.display = "none";
+            backButton1.style.display = "flex";
+            backButton1.style.justifyContent = "space-between"
+            closeCalc()
+        }
+     /* to transition to the exam screen*/
+     // functions for the subjects
+        function quiz(subject){
+            scoreArray = [];
+            score = 0;
+            currentQuestion = 0
+            attemptCount = 0
+            missed = 0
+            skipped = 0
+            currentSubject = subject;
+            displayState.style.display = "none";
+            questionDisplay.style.display ="flex";
+            questionDisplay.style.animation ="fadein 0.5s ease"
+            backButton1.style.display = "flex"
+            backButton1.style.justifyContent = "space-between"
+            credits.style.display ="none";
+            if(currentSubject[currentQuestion].image){
+                image.src = currentSubject[currentQuestion].image
+                image.style.display = "block"
+                }
+            else{
+                image.style.display = "none";
+            }
+                progress.min = 0
+                progress.max = currentSubject.length
+                progress.value = currentQuestion + 1
+            numberQuestion.textContent = "Question " + String(currentQuestion + 1) + "/ " + String(currentSubject.length)
+            questionText.textContent = currentSubject[currentQuestion].question
+            labels[0].textContent = currentSubject[currentQuestion].options[0]
+
+labels[1].textContent = currentSubject[currentQuestion].options[1]
+
+labels[2].textContent = currentSubject[currentQuestion].options[2]
+
+labels[3].textContent = currentSubject[currentQuestion].options[3]
+        }
+            
+        function submitExam(){
+           let submitConfirm = true;
+           if (submitConfirm === true){
+               closeCalc()
+               questionDisplay.style.display =  "none";
+               submitPage.style.display = "flex";
+                submitPage.style.flexDirection = "column"
+               submitPage.style.alignItems = "center"
+               submitPage.style.animation = "fadein 0.5s ease" 
+               clearInterval(interval);
+               attemptCount= 0
+               missed = 0
+               skipped = 0
+               score = 0
+               reviewArray = []
+               for (let x = 0; x < currentSubject.length; x++) {
+    if (scoreArray[x] === undefined) {
+        skipped++;
+        reviewArray.push(currentSubject[x]);
+    }
+    else if (scoreArray[x] === currentSubject[x].answer) {
+        score++;
+        attemptCount++;
+    }
+    else {
+        missed++;
+        attemptCount++;
+        reviewArray.push(currentSubject[x]);
+    }
+}
+           
+           mark.textContent  = score + "/" + currentSubject.length;
+           let percent = ((score/currentSubject.length) * 100).toFixed(1);
+           percentage.textContent = `${percent}%`
+           if (percent >= 70) {
+    percentage.style.color = "green";
+} else if (percent >= 40) {
+    percentage.style.color = "orange";
+} else {
+    percentage.style.color = "red";
+}
+           miss.textContent = missed 
+           attempt.textContent = attemptCount 
+           skip.textContent = skipped
+           total.textContent = currentSubject.length
+        }
+    }
+        function next(){
+          progress.min = 0
+                progress.max = currentSubject.length
+                progress.value = currentQuestion + 1
+          if(currentQuestion < currentSubject.length - 1){
+            currentQuestion = currentQuestion +1;
+            numberQuestion.textContent = "Question " + String(currentQuestion + 1) + "/ " + String(currentSubject.length)
+            if(currentSubject[currentQuestion].image){
+                image.src = currentSubject[currentQuestion].image
+                image.style.display = "block"
+                
+                }
+            else{
+                image.style.display = "none";
+            }
+            questionText.textContent = currentSubject[currentQuestion].question
+            labels[0].textContent = currentSubject[currentQuestion].options[0]
+
+labels[1].textContent = currentSubject[currentQuestion].options[1]
+
+labels[2].textContent = currentSubject[currentQuestion].options[2]
+
+labels[3].textContent = currentSubject[currentQuestion].options[3]
+          for(let i = 0; i < labels.length; i ++){
+              labels[i].style.backgroundColor ="white"
+              if(scoreArray[currentQuestion] == labels[i].textContent){
+                  labels[i].style.backgroundColor ="green"
+              }
+          }
+            }
+          else{
+              
+          }
+        }
+        function previous(){
+            progress.min = 0
+                progress.max = currentSubject.length
+                progress.value = currentQuestion + 1
+            if(currentQuestion > 0){
+            currentQuestion = currentQuestion -1;
+            numberQuestion.textContent = "Question " + String(currentQuestion + 1) + "/ " + String(currentSubject.length)
+            if(currentSubject[currentQuestion].image){
+                image.src = currentSubject[currentQuestion].image
+                image.style.display = "block"
+                
+                }
+            else{
+                image.style.display = "none";
+            }
+            questionText.textContent = currentSubject[currentQuestion].question
+            labels[0].textContent = currentSubject[currentQuestion].options[0]
+
+labels[1].textContent = currentSubject[currentQuestion].options[1] 
+
+labels[2].textContent = currentSubject[currentQuestion].options[2]
+
+labels[3].textContent = currentSubject[currentQuestion].options[3]
+            for(let i = 0; i < labels.length; i ++){
+              labels[i].style.backgroundColor ="white"
+              if(scoreArray[currentQuestion] == labels[i].textContent){
+                  labels[i].style.backgroundColor ="green"
+              }
+          } 
+          }
+        else{
+            
+         }
+        }
+        function choose(selected){
+                for(let i = 0; i < currentSubject[currentQuestion].options.length; i++){
+                    labels[i].style.backgroundColor ="white"
+                }
+                
+                selected.style.backgroundColor = "green"                                
+                scoreArray[currentQuestion] = selected.textContent
+                progress.min = 0
+                progress.max = currentSubject.length
+                progress.value = currentQuestion
+        }
+        /*
+ * Returns to subject selection page from quiz or results.
+ * Hides other screens and shows subject selection.
+ */
+        function back(){
+            submitPage.style.display = "none";
+            questionDisplay.style.display = "none";
+            review.style.display = "none"
+            displayState.style.display = "flex";
+            displayState.style.animation ="fadein 0.5s ease";
+            selectTime.style.transform = "translateY(100%)"
+            clearInterval(interval)     
+         }
+        function home(){
+            subject.style.display = "flex";
+            subject.style.animation ="fadein 0.5s ease"
+            displayState.style.display = "none"
+              submitPage.style.display = "none";
+            questionDisplay.style.display = "none";
+            backButton1.style.display = "none";
+            review.style.display = "none"
+            selectTime.style.transform = "translateY(100%)"
+            clearInterval(interval)
+        }
+        function dialogBox(){
+        questionDisplay.style.display ="none";
+            selectTime.style.display = "flex"
+            selectTime.style.transform = "translateY(-50%)"
+        }
+        function closeDialog(){
+        questionDisplay.style.display ="flex";    
+            selectTime.style.transform = "translateY(100%)"
+        }
+        function select(seconds){
+            clearInterval(interval)
+            timeRemaining = seconds
+            time.textContent = String(Math.floor(seconds/60)) + ":" + String(seconds % 60).padStart(2, "0")
+            interval = setInterval(updateTime, 1000)
+        }
+        function updateTime(){
+           timeRemaining--
+           time.textContent = String(Math.floor(timeRemaining/60)) + ":" + String(timeRemaining % 60).padStart(2, "0")
+           if (timeRemaining === 0){
+               clearInterval(interval)
+               submitExam()
+               return;
+           } 
+        }
+        function calc(){
+            calculator.style.display = "flex"
+            calculator.style.animation ="fadein 0.6s ease"
+            calculator.style.position = "fixed"
+        }
+        let calculator = document.getElementById("calculator")
+        let value1 = document.getElementById("display");
+       function output(value){
+         if ( value1.textContent === "0" || value1.textContent === "Error" || value1.textContent === "NaN"){
+           value1.textContent = value;
+           }
+         else{
+             value1.textContent += value;
+             
+         }
+         value1.scrollLeft = value1.scrollWidth
+       }
+       function clearScreen(){
+           value1.textContent = 0
+       }
+       function calculatorAnswer(){
+         if (/[a-zA-Z {}]/.test(value1.textContent)) {
+        value1.textContent = "Error";
+        return;
+       }
+         try{
+           value1.textContent = eval(value1.textContent)
+       }
+       catch(error){
+           value1.textContent = "Error"
+        }
+       }
+       function changeSign(){
+          value1.textContent = value1.textContent * -1; 
+       }
+       function sqrt(){
+        try{
+          value1.textContent = Math.sqrt(eval(value1.textContent));
+          if(Number.isNaN(value1.textContent)){
+           value1.textContent = "Error"
+       } 
+       }
+       catch(error){
+           value1.textContent = "Error"
+       }
+       }
+       function calcDelete(){
+           if (value1.textContent.length === 1 || value1.textContent === "Error" || value1.textContent === "Infinity"){
+               value1.textContent = 0
+           }
+           else{
+               value1.textContent = value1.textContent.slice(0, -1)
+               value1.scrollLeft = value1.scrollWidth
+           }
+       }
+        function closeCalc(){
+            calculator.style.display = "none"
+        }
+        let reviewIndex = 0
+        function reviewQuestion(){
+            reviewIndex = 0
+            review.style.display ="flex"
+            review.style.animation = 'fadein 0.5s ease'
+            submitPage.style.display="none"
+            if (reviewArray.length === 0) {
+    alert("No missed or skipped questions to review! Congratulations!");
+    return;
+} 
+            if(reviewArray[reviewIndex].image){
+                reviewQuestionImage.src = reviewArray[reviewIndex].image
+                reviewQuestionImage.style.display = "block"
+                }
+            else{
+                reviewQuestionImage.style.display = "none";
+            }
+  reviewQuestionQuestion.textContent = reviewArray[reviewIndex].question
+            for(let j = 0; j < 4; j++){
+                
+                label1[j].textContent = reviewArray[reviewIndex].options[j]
+                label1[j].style.backgroundColor =""
+                if(label1[j].textContent == reviewArray[reviewIndex].answer)
+                label1[j].style.backgroundColor = "green"
+            }
+            explanationText.textContent = reviewArray[reviewIndex].explanation
+        }
+        function reviewNext(){
+            if(reviewIndex < reviewArray.length - 1){
+                reviewIndex++
+            if(reviewArray[reviewIndex].image){
+                reviewQuestionImage.src = reviewArray[reviewIndex].image
+               reviewQuestionImage.style.display = "block"
+                }
+            else{
+                reviewQuestionImage.style.display = "none";
+            } reviewQuestionQuestion.textContent = reviewArray[reviewIndex].question
+            for(let j = 0; j < 4; j++){
+                 label1[j].style.backgroundColor =""
+                label1[j].textContent = reviewArray[reviewIndex].options[j]
+                if(label1[j].textContent == reviewArray[reviewIndex].answer)
+                label1[j].style.backgroundColor = "green"
+            }
+           } 
+           explanationText.textContent = reviewArray[reviewIndex].explanation
+        }
+        function reviewPrevious(){
+            if(reviewIndex > 0){
+                reviewIndex--
+            if(reviewArray[reviewIndex].image){
+                reviewQuestionImage.src = reviewArray[reviewIndex].image
+                reviewQuestionImage.style.display = "block"
+                }
+            else{
+                reviewQuestionImage.style.display = "none";
+            } reviewQuestionQuestion.textContent = reviewArray[reviewIndex].question
+            for(let j = 0; j < 4; j++){
+                 label1[j].style.backgroundColor =""
+                label1[j].textContent = reviewArray[reviewIndex].options[j]
+                if(label1[j].textContent == reviewArray[reviewIndex].answer)
+                label1[j].style.backgroundColor = "green"
+            }
+          }
+          explanationText.textContent = reviewArray[reviewIndex].explanation
+        }
+    </script>
+</html>
